@@ -3,8 +3,8 @@ extends CharacterBody2D
 @export var yes = 1
 
 #PUSH TEST
-const max_speed = 1000
-const accel = 100
+const max_speed = 400
+const accel = 1000
 const friction = 600
 #ADJUST
 

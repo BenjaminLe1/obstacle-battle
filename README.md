@@ -36,3 +36,20 @@ flowchart TD
     H --> W[Update UI]
     W --> N
     ```
+
+
+```mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Initialize : Start Game
+    Initialize --> Read_Input : Initialization Complete
+    Read_Input --> Process_Input : Input Received
+    Process_Input --> Send_Data : Input Processed
+    Send_Data --> Read_Input : Data Sent
+    Initialize --> Error : Initialization Error
+    Read_Input --> Error : Input Error
+    Process_Input --> Error : Processing Error
+    Send_Data --> Error : Communication Error
+    Error --> Initialize : Error Resolved
+
+```

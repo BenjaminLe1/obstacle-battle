@@ -35,7 +35,7 @@ flowchart TD
     V --> C
     H --> W[Update UI]
     W --> N
-    ```
+```
 
 # state diagram
 

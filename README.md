@@ -24,19 +24,15 @@ flowchart TD
     E -->|Exit Condition| O[End Game]
     O --> P[Display Results]
     P --> Q[Game Over]
-
-    subgraph Firmware
-        F --> R[Process Joystick Data]
-        R --> S[Send Data to Game Software]
-        L --> T[Process Obstacle Data]
-        T --> S
-    end
-
-    subgraph Software
-        B --> U[Initialize Physics Engine]
-        U --> V[Initialize UI]
-        V --> C
-        H --> W[Update UI]
-        W --> N
-    end
+    
+    F --> R[Process Joystick Data]
+    R --> S[Send Data to Game Software]
+    L --> T[Process Obstacle Data]
+    T --> S
+    
+    B --> U[Initialize Physics Engine]
+    U --> V[Initialize UI]
+    V --> C
+    H --> W[Update UI]
+    W --> N
     ```

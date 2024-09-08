@@ -1,6 +1,6 @@
 # obstacle-battle
  
-```mermaid
+```
 flowchart TD
     A[Start Game] --> B[Initialize Game State]
     B --> C[Load Game Assets]

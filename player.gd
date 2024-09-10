@@ -1,57 +1,33 @@
 extends CharacterBody2D
 
-@export var yes = 1
+var input_vector : Vector2
+#var vel : Vector2
+const acceleration = 300
+const max_speed = 500
 
-#PUSH TEST
-const max_speed = 400
-const accel = 1000
-const friction = 600
-#ADJUST
-
-var input = Vector2.ZERO
+var rotation_dir : int
+const rotation_speed = 3.5
+const friction_weight = 0.1
 
 func _physics_process(delta):
-	player_movement(delta)
+	#ADJUST FOR JOYSTICK
+	input_vector.x = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
+	rotation_dir = 0
+	#ADJUST FOR JOYSTICK
+	if Input.is_action_pressed("ui_right"):
+		rotation_dir += 1
+	if Input.is_action_pressed("ui_left"):
+		rotation_dir += -1
+	velocity += Vector2(input_vector.x * acceleration * delta, 0).rotated(rotation)
+	velocity.x = clamp(velocity.x, -max_speed, max_speed)
+	velocity.y = clamp(velocity.y, -max_speed, max_speed)
 
-func get_input():
-	input.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	input.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
-	return input.normalized()
-#ADJUST WITH JOYSTICK
-	
-func player_movement(delta):
-	input = get_input()
-	
-	if input == Vector2.ZERO:
-		if velocity.length() > (friction * delta):
-			velocity -= velocity.normalized() * (friction * delta)
-		else:
-			velocity = Vector2.ZERO
-	else:
-		velocity += (input * accel * delta)
-		velocity = velocity.limit_length(max_speed)
-		
+	if input_vector.x == 0:
+		velocity = lerp(velocity, Vector2.ZERO, friction_weight)
+		if abs(velocity.x) <= 0.1:
+			velocity.x = 0
+		if abs(velocity.y) <= 0.1:
+			velocity.y = 0
+
+	rotation += rotation_dir * rotation_speed * delta
 	move_and_slide()
-
-#const SPEED = 300.0
-#const JUMP_VELOCITY = -400.0
-#
-#
-#func _physics_process(delta: float) -> void:
-	## Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-#
-	## Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("ui_left", "ui_right")
-	#if direction:
-		#velocity.x = direction * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-#
-	#move_and_slide()

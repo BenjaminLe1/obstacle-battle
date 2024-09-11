@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpf7v36h4r0oq"]
+
+[ext_resource type="Texture2D" uid="uid://cbo2j5aqe2fwh" path="res://meteor3.png" id="1_0402f"]
+
+[node name="Sprite2D" type="Sprite2D"]
+scale = Vector2(0.245714, 0.24)
+texture = ExtResource("1_0402f")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+scale = Vector2(0.989224, 1.00481)
+polygon = PackedVector2Array(-143.076, -242.484, 0, -237.5, 65.1163, -250, 256.395, -154.167, 305.233, 8.33333, 260.465, 204.167, 89.5349, 291.667, -85.4651, 279.167, -223.837, 141.667, -284.884, -62.5, -236.047, -162.5)

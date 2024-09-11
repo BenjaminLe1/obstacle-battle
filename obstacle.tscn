@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://ceti2fdwft873"]
+
+[ext_resource type="Script" path="res://obstacle.gd" id="1_glh0s"]
+[ext_resource type="Texture2D" uid="uid://x7d5taxhlpew" path="res://testobstaclered.svg" id="1_ri30a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7t1a"]
+size = Vector2(9.5, 11)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_glh0s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-31, -16)
+shape = SubResource("RectangleShape2D_x7t1a")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-30.9531, -16.0107)
+scale = Vector2(0.0347654, 0.0400537)
+texture = ExtResource("1_ri30a")

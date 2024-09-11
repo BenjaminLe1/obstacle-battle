@@ -2,11 +2,11 @@ extends CharacterBody2D
 
 var input_vector : Vector2
 #var vel : Vector2
-const acceleration = 300
-const max_speed = 500
+const acceleration = 200
+const max_speed = 200
 
 var rotation_dir : int
-const rotation_speed = 3.5
+const rotation_speed = 3
 const friction_weight = 0.1
 
 func _physics_process(delta):

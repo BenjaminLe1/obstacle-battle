@@ -1,16 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://6nyuithkc6gx"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_nrwpl"]
-[ext_resource type="Texture2D" uid="uid://c816x6i238gwa" path="res://ship.png" id="2_6many"]
+[ext_resource type="Texture2D" uid="uid://pno4dhwa2t8f" path="res://spaceship.png" id="2_o7iln"]
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_nrwpl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.999992, -1)
+position = Vector2(-1.90735e-06, 1)
 rotation = 1.5708
-scale = Vector2(1.85535, 2.39825)
-texture = ExtResource("2_6many")
+scale = Vector2(1.18667, 1.38459)
+texture = ExtResource("2_o7iln")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(6, -40, -6, -43, -23, -43, -31, -35, -36, 0, -31, 35, -23, 41, -4, 41, 9, 37, 6, 33, -17, 30, 0, 12, 39, 2, 38, -5, 2, -13, -18, -34, 10, -36)
+position = Vector2(0.0924584, 1.14538)
+scale = Vector2(0.563016, 0.64538)
+polygon = PackedVector2Array(-36, -47, -18, -46, -6, -30, 8, -26, 9, -16, 34, -15, 63, -2, 35, 13, 9, 13, 9, 26, -6, 28, -17, 45, -37, 45, -38, 27, -56, 22, -58, -24, -38, -29)

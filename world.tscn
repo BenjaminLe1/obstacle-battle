@@ -20,7 +20,7 @@ offset_bottom = 887.0
 texture = ExtResource("1_8m3x3")
 
 [node name="player" parent="." instance=ExtResource("1_wrisp")]
-position = Vector2(568, 310)
+position = Vector2(633, 350)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 

@@ -1,19 +1,18 @@
+
 extends CharacterBody2D
 
 var input_vector : Vector2
-#var vel : Vector2
 const acceleration = 200
 const max_speed = 200
-
 var rotation_dir : int
 const rotation_speed = 3
 const friction_weight = 0.1
 
+var collision_count : int = 0  # Collision counter
+
 func _physics_process(delta):
-	#ADJUST FOR JOYSTICK
 	input_vector.x = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
 	rotation_dir = 0
-	#ADJUST FOR JOYSTICK
 	if Input.is_action_pressed("ui_right"):
 		rotation_dir += 1
 	if Input.is_action_pressed("ui_left"):

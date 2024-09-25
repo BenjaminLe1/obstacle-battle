@@ -4,16 +4,16 @@
 [ext_resource type="Texture2D" uid="uid://cbo2j5aqe2fwh" path="res://meteor3.png" id="2_1i2dg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x7t1a"]
-size = Vector2(9.5, 11)
+size = Vector2(16, 17)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_glh0s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-31, -16)
+position = Vector2(-30, -17)
 shape = SubResource("RectangleShape2D_x7t1a")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-30.9531, -16.0107)
-scale = Vector2(0.0347654, 0.0400537)
+position = Vector2(-30, -17)
+scale = Vector2(0.0288113, 0.0314554)
 texture = ExtResource("2_1i2dg")

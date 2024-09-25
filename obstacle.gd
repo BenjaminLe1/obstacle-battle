@@ -1,14 +1,8 @@
 extends CharacterBody2D
 
-
-var vel = Vector2(1,0)
-
-var speed = 300
-
 func _physics_process(delta):
+	var collision_info = move_and_collide(velocity * delta)
 	
-	var collision_info = move_and_collide(vel.normalized() * delta * speed)
-	
-	
-	
-	
+	if collision_info:
+		# Handle collision if needed
+		queue_free()  # Destroy the obstacle on collision

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://camt2om73uxxu"]
+[gd_scene load_steps=11 format=3 uid="uid://camt2om73uxxu"]
 
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
 [ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="2_3y5vq"]
-[ext_resource type="PackedScene" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="PackedScene" uid="uid://bgb2lq8enpa8t" path="res://portal.tscn" id="5_3tvl3"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wb73"]
@@ -21,33 +22,53 @@ var obstacle_speed = 400  # Adjust this value to change the speed of the project
 func _process(delta):
 	if Input.is_action_just_pressed(\"ui_accept\"):
 		shoot()
-	
 	$Node2D.look_at(get_global_mouse_position())
 
 func shoot():
 	var obstacle = ObstaclePath.instantiate()
-	
+	var mid = obstacle.position
+	mid.x = 640
+	mid.y = 360
 	get_parent().add_child(obstacle)
-	
 	obstacle.position = $Node2D/Marker2D.global_position
-	
-	# Calculate direction from the obstacle towards the mouse
-	var direction = (get_global_mouse_position() - obstacle.position).normalized()
+	var direction = (mid - obstacle.position).normalized()
 	var speed = 200
 	obstacle.velocity = direction*speed
-	
+
+var SPEED = 300
+func _physics_process(delta: float) -> void:
+	var directionx := Input.get_axis(\"A\", \"D\")
+	if directionx:
+		velocity.x = directionx * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+	var directiony := Input.get_axis(\"W\", \"S\")
+	if directiony:
+		velocity.y = directiony * SPEED
+	else:
+		velocity.y = move_toward(velocity.y, 0, SPEED)
+
+	move_and_slide()
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group(\"Portal\"):
+		position.x = 1088
+		position.y = -128
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pp0fg"]
 size = Vector2(76, 73)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxvxm"]
+size = Vector2(76, 72)
+
 [node name="world" type="Node2D" groups=["player"]]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -9.0
+offset_left = -132.0
 offset_top = -137.0
-offset_right = 1289.0
-offset_bottom = 887.0
+offset_right = 1428.0
+offset_bottom = 912.0
 texture = ExtResource("1_8m3x3")
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_wrisp")]
@@ -87,21 +108,35 @@ scale = Vector2(0.144286, 0.141428)
 script = SubResource("GDScript_qlby5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player2"]
-position = Vector2(644, 674)
+position = Vector2(108, 626)
 shape = SubResource("RectangleShape2D_pp0fg")
 
 [node name="Sprite2D" type="Sprite2D" parent="player2"]
-position = Vector2(647, 674)
+position = Vector2(110, 628)
 scale = Vector2(0.634766, 0.587891)
 texture = ExtResource("2_3y5vq")
 
 [node name="Node2D" type="Node2D" parent="player2"]
-position = Vector2(645, 609)
+position = Vector2(110, 578)
 
 [node name="Marker2D" type="Marker2D" parent="player2/Node2D"]
-position = Vector2(-28, 11)
+visible = false
+position = Vector2(3, 1)
+
+[node name="Area2D" type="Area2D" parent="player2"]
+position = Vector2(109, 626)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player2/Area2D"]
+visible = false
+position = Vector2(-2, 1)
+shape = SubResource("RectangleShape2D_sxvxm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(638, 370)
 
 [node name="HUD" parent="." instance=ExtResource("5_3khpd")]
+
+[node name="Sprite2D4" parent="." instance=ExtResource("5_3tvl3")]
+position = Vector2(378, 626)
+
+[connection signal="area_entered" from="player2/Area2D" to="player2" method="_on_area_2d_area_entered"]

@@ -24,13 +24,17 @@ func _process(delta):
 	if Input.is_action_just_pressed(\"ui_accept\"):
 		shoot()
 	if Input.is_action_just_pressed(\"U\"):
-		rotation_degrees = 90
+		rotation_degrees += 90
 	if Input.is_action_just_pressed(\"I\"):
-		position.x = -100
-		position.y = -100
+		rotation_degrees -= 90
+
 	if Input.is_action_just_pressed(\"O\"):
 		position.x = 100
 		position.y = 100
+		
+	if Input.is_action_just_pressed(\"P\"):
+		position.x = 1200
+		position.y = 700
 	$Node2D.look_at(get_global_mouse_position())
 
 func shoot():

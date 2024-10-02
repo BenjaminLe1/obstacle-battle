@@ -11,6 +11,8 @@ const friction_weight = 0.1
 var collision_count : int = 0  # Collision counter
 
 func _physics_process(delta):
+	if Collision.lives <= 0:
+		explode()
 	input_vector.x = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
 	rotation_dir = 0
 	if Input.is_action_pressed("ui_right"):
@@ -30,3 +32,5 @@ func _physics_process(delta):
 
 	rotation += rotation_dir * rotation_speed * delta
 	move_and_slide()
+func explode():
+	pass

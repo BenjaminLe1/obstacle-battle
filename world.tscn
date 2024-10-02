@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://camt2om73uxxu"]
+[gd_scene load_steps=13 format=3 uid="uid://camt2om73uxxu"]
 
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://meteor1.tscn" id="2_r7unl"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
 [ext_resource type="PackedScene" uid="uid://bgb2lq8enpa8t" path="res://portal.tscn" id="5_3tvl3"]
+[ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wb73"]
 size = Vector2(1301, 26)
@@ -135,6 +136,8 @@ shape = SubResource("RectangleShape2D_sxvxm")
 position = Vector2(640, 360)
 
 [node name="HUD" parent="." instance=ExtResource("5_3khpd")]
+
+[node name="Control" parent="HUD" instance=ExtResource("6_ue8mf")]
 
 [node name="Sprite2D4" parent="." instance=ExtResource("5_3tvl3")]
 position = Vector2(378, 626)

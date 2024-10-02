@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 signal collision_count_updated(new_count)
 
+var pass_border = 0
+
 func _physics_process(delta):
 	var collision_info = move_and_collide(velocity * delta)
 	

@@ -1,17 +1,17 @@
-[gd_scene load_steps=12 format=3 uid="uid://camt2om73uxxu"]
+[gd_scene load_steps=11 format=3 uid="uid://camt2om73uxxu"]
 
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
 [ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="2_3y5vq"]
-[ext_resource type="PackedScene" path="res://meteor1.tscn" id="2_r7unl"]
-[ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
+[ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="PackedScene" uid="uid://c12xj0tp25f3h" path="res://hud.tscn" id="5_3khpd"]
 [ext_resource type="PackedScene" uid="uid://bgb2lq8enpa8t" path="res://portal.tscn" id="5_3tvl3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wb73"]
-size = Vector2(1301, 26)
+size = Vector2(1299, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqj0y"]
-size = Vector2(25.5, 755.5)
+size = Vector2(25, 754)
 
 [sub_resource type="GDScript" id="GDScript_qlby5"]
 script/source = "extends CharacterBody2D
@@ -22,6 +22,14 @@ var obstacle_speed = 400  # Adjust this value to change the speed of the project
 func _process(delta):
 	if Input.is_action_just_pressed(\"ui_accept\"):
 		shoot()
+	if Input.is_action_just_pressed(\"U\"):
+		rotation_degrees = 90
+	if Input.is_action_just_pressed(\"I\"):
+		position.x = -100
+		position.y = -100
+	if Input.is_action_just_pressed(\"O\"):
+		position.x = 100
+		position.y = 100
 	$Node2D.look_at(get_global_mouse_position())
 
 func shoot():
@@ -53,11 +61,8 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group(\"Portal\"):
 		position.x = 1088
-		position.y = -128
+		position.y = 128
 "
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pp0fg"]
-size = Vector2(76, 73)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxvxm"]
 size = Vector2(76, 72)
@@ -65,23 +70,23 @@ size = Vector2(76, 72)
 [node name="world" type="Node2D" groups=["player"]]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -132.0
-offset_top = -137.0
-offset_right = 1428.0
-offset_bottom = 912.0
+offset_left = -130.0
+offset_top = -135.0
+offset_right = 1430.0
+offset_bottom = 914.0
 texture = ExtResource("1_8m3x3")
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_wrisp")]
 position = Vector2(640, 360)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Border"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(638, -1)
 shape = SubResource("RectangleShape2D_1wb73")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(643.5, 726)
+position = Vector2(642.5, 726.5)
 shape = SubResource("RectangleShape2D_1wb73")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
@@ -89,7 +94,7 @@ position = Vector2(1278.25, 363.25)
 shape = SubResource("RectangleShape2D_mqj0y")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 357)
+position = Vector2(0.5, 362)
 shape = SubResource("RectangleShape2D_mqj0y")
 
 [node name="Sprite2D" parent="." instance=ExtResource("2_r7unl")]
@@ -105,26 +110,26 @@ position = Vector2(400, 495)
 scale = Vector2(0.144286, 0.141428)
 
 [node name="player2" type="CharacterBody2D" parent="."]
+position = Vector2(138, 522)
 script = SubResource("GDScript_qlby5")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player2"]
-position = Vector2(108, 626)
-shape = SubResource("RectangleShape2D_pp0fg")
-
 [node name="Sprite2D" type="Sprite2D" parent="player2"]
-position = Vector2(110, 628)
-scale = Vector2(0.634766, 0.587891)
+position = Vector2(-0.812513, 0)
+rotation = 1.5708
+scale = Vector2(0.637695, 0.587891)
 texture = ExtResource("2_3y5vq")
 
 [node name="Node2D" type="Node2D" parent="player2"]
-position = Vector2(110, 578)
+position = Vector2(40, 0)
+scale = Vector2(1.08472, 0.921899)
 
 [node name="Marker2D" type="Marker2D" parent="player2/Node2D"]
 visible = false
-position = Vector2(3, 1)
+position = Vector2(1.19209e-06, -6.79493e-06)
 
 [node name="Area2D" type="Area2D" parent="player2"]
-position = Vector2(109, 626)
+visible = false
+position = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player2/Area2D"]
 visible = false

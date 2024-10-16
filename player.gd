@@ -1,5 +1,6 @@
-
 extends CharacterBody2D
+
+const deathParticle = preload("res://death.tscn")
 
 var input_vector : Vector2
 const acceleration = 200
@@ -10,9 +11,12 @@ const friction_weight = 0.1
 
 var collision_count : int = 0  # Collision counter
 
-func _physics_process(delta):
+func _process(delta):
 	if Collision.lives <= 0:
-		explode()
+		Kill()
+
+func _physics_process(delta):
+	
 	input_vector.x = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
 	rotation_dir = 0
 	if Input.is_action_pressed("ui_right"):
@@ -32,5 +36,11 @@ func _physics_process(delta):
 
 	rotation += rotation_dir * rotation_speed * delta
 	move_and_slide()
-func explode():
-	pass
+func Kill():
+	var _particle = deathParticle.instantiate()
+	_particle.position = global_position
+	_particle.rotation = global_rotation
+	_particle.emitting = true
+	get_tree().current_scene.add_child(_particle)
+	
+	queue_free()

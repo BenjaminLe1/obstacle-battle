@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmylu7n71syhf"]
+
+[ext_resource type="Script" path="res://death.gd" id="1_k3bhu"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_44jgx"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+color = Color(0.721071, 0.452294, 0.195519, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_44jgx")
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_k3bhu")

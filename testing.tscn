@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcbc0i0ehh12u"]
+
+[ext_resource type="Script" path="res://Connection.cs" id="1_bvkcg"]
+
+[node name="Test" type="Node2D"]
+script = ExtResource("1_bvkcg")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 1276.0
+offset_bottom = 746.0

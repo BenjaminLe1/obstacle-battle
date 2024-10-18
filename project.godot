@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Obstacle Battle"
 run/main_scene="res://start_screen.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -23,6 +23,10 @@ Collision="*res://collision.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[dotnet]
+
+project/assembly_name="Obstacle Battle"
 
 [input]
 

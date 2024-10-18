@@ -14,7 +14,13 @@ var collision_count : int = 0  # Collision counter
 func _process(delta):
 	if Collision.lives <= 0:
 		Kill()
-
+func Kill():
+	var _particle = deathParticle.instantiate()
+	_particle.position = global_position
+	_particle.rotation = global_rotation
+	_particle.emitting = true
+	get_tree().current_scene.add_child(_particle)
+	queue_free()
 func _physics_process(delta):
 	
 	input_vector.x = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
@@ -36,11 +42,3 @@ func _physics_process(delta):
 
 	rotation += rotation_dir * rotation_speed * delta
 	move_and_slide()
-func Kill():
-	var _particle = deathParticle.instantiate()
-	_particle.position = global_position
-	_particle.rotation = global_rotation
-	_particle.emitting = true
-	get_tree().current_scene.add_child(_particle)
-	
-	queue_free()

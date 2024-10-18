@@ -14,3 +14,7 @@ func _physics_process(delta):
 			queue_free()  # Destroy the obstacle on collision
 		else:
 			queue_free()
+
+
+func _on_timer_timeout() -> void:
+	pass

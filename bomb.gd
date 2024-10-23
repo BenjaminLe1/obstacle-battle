@@ -13,6 +13,12 @@ func _physics_process(delta):
 				Collision.lives -= 1
 			queue_free()  # Destroy the obstacle on collision
 		else:
+			var _particle = bombParticle.instantiate()
+			_particle.position = global_position
+			_particle.rotation = global_rotation
+			_particle.emitting = true
+			get_tree().current_scene.add_child(_particle)
+			queue_free()
 			queue_free()
 func _on_timer_timeout() -> void:
 	var _particle = bombParticle.instantiate()

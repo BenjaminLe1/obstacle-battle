@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
 [ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="2_3y5vq"]
-[ext_resource type="PackedScene" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
 [ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
 [ext_resource type="Script" path="res://energy_bar.gd" id="7_j2vvg"]
@@ -32,13 +32,13 @@ func _process(delta):
 		elif selection == \"Missle\":
 			missle()			
 
-	if Input.is_action_just_pressed(\"O\"):
+	if Input.is_action_just_pressed(\"U\"):
 		selection = \"Main\"
 		print(\"Selected Main\")
-	if Input.is_action_just_pressed(\"P\"):
+	if Input.is_action_just_pressed(\"I\"):
 		selection = \"Bomb\"
 		print(\"Selected Bomb\")
-	if Input.is_action_just_pressed(\"U\"):
+	if Input.is_action_just_pressed(\"O\"):
 		selection = \"Missle\"
 		print(\"Selected Missle\")
 	$Node2D.look_at(get_global_mouse_position())
@@ -59,7 +59,6 @@ func bomb():
 	var mid = bomb.position
 	mid.x = 640
 	mid.y = 360
-	print(\"bomb position:\", mid.x, mid.y)
 	get_parent().add_child(bomb)
 	bomb.position = $Node2D/Marker2D.global_position
 	var direction = (mid - bomb.position).normalized()
@@ -71,8 +70,6 @@ func missle():
 	var mid = missle.position
 	mid.x = 640
 	mid.y = 360
-	print(\"missle position:\", mid.x, mid.y)
-	print(\"missle shot\")
 	missle.position = $Node2D/Marker2D.global_position
 	get_parent().add_child(missle)
 	var direction = (mid - missle.position).normalized()

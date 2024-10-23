@@ -4,20 +4,19 @@
 [ext_resource type="Script" path="res://guidedmissle.gd" id="1_jrcvd"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1e8m2"]
-radius = 5.05162
-height = 33.9597
+radius = 4.99924
+height = 28.0306
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(-951, -31)
 script = ExtResource("1_jrcvd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1189, 304)
+position = Vector2(3.8147e-06, -9.53674e-07)
 rotation = -1.58825
 shape = SubResource("CapsuleShape2D_1e8m2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1188, 304)
+position = Vector2(2.38419e-07, 0)
 rotation = 0.794125
 scale = Vector2(0.1, 0.1)
 skew = 0.0174533

@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvndvvqlv6api"]
+
+[ext_resource type="Script" path="res://bombParticle.gd" id="1_cdlu0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_44jgx"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 15.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 4.0
+color = Color(0.85782, 0.31216, 0.320461, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s5qgm"]
+radius = 56.6799
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+scale = Vector2(0.993471, 1)
+emitting = false
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_44jgx")
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_cdlu0")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.29654, -1.20202)
+shape = SubResource("CircleShape2D_s5qgm")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

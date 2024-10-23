@@ -113,10 +113,10 @@ bg_color = Color(0.000646265, 0.00063119, 0.00125989, 1)
 [node name="world" type="Node2D" groups=["player"]]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -130.0
-offset_top = -135.0
-offset_right = 1430.0
-offset_bottom = 914.0
+offset_left = -136.0
+offset_top = -134.0
+offset_right = 1424.0
+offset_bottom = 915.0
 texture = ExtResource("1_8m3x3")
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_wrisp")]

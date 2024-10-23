@@ -28,11 +28,6 @@ func _process(delta):
 			shoot()
 		elif selection == \"Bomb\":
 			bomb()			
-	if Input.is_action_just_pressed(\"U\"):
-		rotation_degrees += 90
-	if Input.is_action_just_pressed(\"I\"):
-		rotation_degrees -= 90
-
 	if Input.is_action_just_pressed(\"O\"):
 		selection = \"Main\"
 	if Input.is_action_just_pressed(\"P\"):
@@ -60,8 +55,6 @@ func bomb():
 	var direction = (mid - bomb.position).normalized()
 	var speed = 200
 	bomb.velocity = direction*speed
-	
-
 
 var SPEED = 300
 func _physics_process(delta: float) -> void:
@@ -93,10 +86,10 @@ bg_color = Color(0.000646265, 0.00063119, 0.00125989, 1)
 [node name="world" type="Node2D" groups=["player"]]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -130.0
-offset_top = -135.0
-offset_right = 1430.0
-offset_bottom = 914.0
+offset_left = -136.0
+offset_top = -134.0
+offset_right = 1424.0
+offset_bottom = 915.0
 texture = ExtResource("1_8m3x3")
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_wrisp")]

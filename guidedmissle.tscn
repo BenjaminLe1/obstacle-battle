@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://vctmykbcwkgp"]
+
+[ext_resource type="Texture2D" uid="uid://dfq6r1dcoxaav" path="res://missle.png" id="1_c4iga"]
+[ext_resource type="Script" path="res://guidedmissle.gd" id="1_jrcvd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1e8m2"]
+radius = 5.05162
+height = 33.9597
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(-951, -31)
+script = ExtResource("1_jrcvd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1189, 304)
+rotation = -1.58825
+shape = SubResource("CapsuleShape2D_1e8m2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1188, 304)
+rotation = 0.794125
+scale = Vector2(0.1, 0.1)
+skew = 0.0174533
+texture = ExtResource("1_c4iga")

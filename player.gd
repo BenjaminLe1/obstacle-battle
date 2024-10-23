@@ -14,26 +14,28 @@ var collision_count : int = 0  # Collision counter
 func _process(delta):
 	if Input.is_action_just_pressed("U"):
 		shield()
+		#IF shield is already true print error message "already active"
 	if Input.is_action_just_pressed("I"):
 		speed_up()
 	if Input.is_action_just_pressed("O"):
 		shrink()
+	if Collision.shield:
+		$shield.visible = true
+	else:
+		$shield.visible = false
 	if Collision.lives <= 0:
 		Kill()
 func shield():
-	pass
+	$shieldTimer.start
+	Collision.shield = true
 func speed_up():
+	$speed_upTimer.start
 	acceleration = 600
 	max_speed = 600
-	#after X seconds
-	#acceleration = 200
-	#max_speed = 200
 func shrink():
+	$shrinkTimer.start
 	scale.x = .5
 	scale.y = .5
-	#after X seconds
-	#scale.x = 1
-	#scale.y = 1
 func Kill():
 	var _particle = deathParticle.instantiate()
 	_particle.position = global_position
@@ -60,3 +62,12 @@ func _physics_process(delta):
 
 	rotation += rotation_dir * rotation_speed * delta
 	move_and_slide()
+
+func _on_shield_timer_timeout() -> void:
+	Collision.shield = false
+func _on_speed_up_timer_timeout() -> void:
+	acceleration = 200
+	max_speed = 200
+func _on_shrink_timer_timeout() -> void:
+	scale.x = 1
+	scale.y = 1

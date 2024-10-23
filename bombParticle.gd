@@ -6,6 +6,10 @@ func _ready():
 func _process(delta):
 	if !emitting:
 		queue_free()
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		Collision.lives -= 1
+		if Collision.shield:
+			Collision.shield = false
+		else:
+			Collision.lives -= 1

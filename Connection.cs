@@ -23,11 +23,6 @@ public partial class Connection : Node2D
 	{
 		if(!serialPort.IsOpen) return;
 		string serialMessage = serialPort.ReadExisting();
-		if serialMessage = "B1\n":
-			Collision.B1 = True
-		if serialMessage = "B2\n":
-			Collision.B2 = True
-		if serialMessage = "B3\n":
-			Collision.B3 = True
+		serialMessage = "B1\n";
 	}
 }

@@ -32,13 +32,16 @@ func _process(delta):
 		elif selection == \"Missle\":
 			missle()			
 
-	if Collision.B1:
+	#if Collision.B1:
+	if Input.is_action_just_pressed(\"U\"):
 		selection = \"Main\"
 		print(\"Selected Main\")
-	if Collision.B2:
+	#if Collision.B2:
+	if Input.is_action_just_pressed(\"I\"):
 		selection = \"Bomb\"
 		print(\"Selected Bomb\")
-	if Collision.B3:
+	#if Collision.B3:
+	if Input.is_action_just_pressed(\"O\"):
 		selection = \"Missle\"
 		print(\"Selected Missle\")
 	$Node2D.look_at(get_global_mouse_position())

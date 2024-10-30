@@ -13,7 +13,7 @@ public partial class Connection : Node2D
 	{
 		text = GetNode<RichTextLabel>("RichTextLabel");
 		serialPort = new SerialPort();
-		serialPort.PortName = "COM3";
+		//serialPort.PortName = "COM3";
 		serialPort.BaudRate = 9600;
 		serialPort.Open();
 
@@ -24,5 +24,8 @@ public partial class Connection : Node2D
 		if(!serialPort.IsOpen) return;
 		string serialMessage = serialPort.ReadExisting();
 		serialMessage = "B1\n";
+		text.Text = serialMessage;
+		//serialMessage = "B1\n";
+		//append_text("B1\n");
 	}
 }

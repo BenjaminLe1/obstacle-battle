@@ -1,7 +1,7 @@
 extends RichTextLabel
 
 func _ready() -> void:
-	var rawText = Connection.serialMessage
+	var rawText = Connection.msg
 	print(rawText)
 	if rawText == "B1\n":
 		print("B1 Pressed")

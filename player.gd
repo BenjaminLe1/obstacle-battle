@@ -13,11 +13,14 @@ var collision_count : int = 0  # Collision counter
 
 func _process(delta):
 	if Input.is_action_just_pressed("U"):
+		print("Shield Activated")
 		shield()
 		#IF shield is already true print error message "already active"
 	if Input.is_action_just_pressed("I"):
+		print("Speed Up Activated")
 		speed_up()
 	if Input.is_action_just_pressed("O"):
+		print("Shrink Activated")
 		shrink()
 	if Collision.shield:
 		$shield.visible = true

@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var count = 0
 
+
 func _physics_process(delta):
 	var collision_info = move_and_collide(velocity * delta)
 	

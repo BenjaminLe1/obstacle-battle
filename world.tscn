@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
 [ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="2_3y5vq"]
-[ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="PackedScene" path="res://meteor1.tscn" id="2_r7unl"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
 [ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
 [ext_resource type="Script" path="res://energy_bar.gd" id="7_j2vvg"]
@@ -21,22 +21,15 @@ const ObstaclePath = preload(\"res://obstacle.tscn\")
 const BombPath = preload(\"res://bomb.tscn\")
 const MisslePath = preload(\"res://guidedmissle.tscn\")
 var obstacle_speed = 400  # Adjust this value to change the speed of the projectile
-var selection = \"Main\"
 
 func _process(delta):
-	if Input.is_action_just_pressed(\"ui_accept\"):
-		if selection == \"Main\":
-			shoot()
-		elif selection == \"Bomb\":
-			bomb()
-
 	if Collision.B1:
-		selection = \"Main\"
+		shoot()
 		print(\"Selected Main\")
 	if Collision.B2:
-		selection = \"Bomb\"
+		bomb()
 		print(\"Selected Bomb\")
-	if Collision.B3 and Collision.special == 100:
+	if (Collision.B3 or Input.is_action_just_pressed(\"U\")) and Collision.special == 100:
 		missle()
 		print(\"Fired Missle\")
 	$Node2D.look_at(get_global_mouse_position())

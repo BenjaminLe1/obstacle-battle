@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
 [ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="2_3y5vq"]
-[ext_resource type="PackedScene" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
 [ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
 [ext_resource type="Script" path="res://energy_bar.gd" id="7_j2vvg"]
@@ -26,11 +26,12 @@ func _process(delta):
 	if Collision.B1:
 		shoot()
 		print(\"Selected Main\")
-	if Collision.B2:
+	if (Collision.B2 or Input.is_action_just_pressed(\"I\")):
 		bomb()
 		print(\"Selected Bomb\")
 	if (Collision.B3 or Input.is_action_just_pressed(\"U\")) and Collision.special == 100:
 		missle()
+		Collision.special = 0
 		print(\"Fired Missle\")
 	$Node2D.look_at(get_global_mouse_position())
 
@@ -92,6 +93,11 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group(\"Portal\"):
 		position.x = 1088
 		position.y = 128
+
+
+func _on_special_timeout() -> void:
+	if Collision.special < 100:
+		Collision.special += 1
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxvxm"]
@@ -166,6 +172,10 @@ position = Vector2(-1, 0)
 position = Vector2(-2, 1)
 shape = SubResource("RectangleShape2D_sxvxm")
 
+[node name="special" type="Timer" parent="player2"]
+wait_time = 0.2
+autostart = true
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
 
@@ -184,3 +194,4 @@ show_percentage = false
 script = ExtResource("7_j2vvg")
 
 [connection signal="area_entered" from="player2/Area2D" to="player2" method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="player2/special" to="player2" method="_on_special_timeout"]

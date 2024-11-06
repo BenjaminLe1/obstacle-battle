@@ -17,7 +17,7 @@ scale = Vector2(0.0794684, 0.0840357)
 texture = ExtResource("2_l5t6g")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 1.75
+wait_time = 1.4
 one_shot = true
 autostart = true
 

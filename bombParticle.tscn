@@ -10,7 +10,7 @@ initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
 scale_min = 4.0
 scale_max = 4.0
-color = Color(0.85782, 0.31216, 0.320461, 1)
+color = Color(0.858824, 0.627451, 0.321569, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_s5qgm"]
 radius = 56.6799

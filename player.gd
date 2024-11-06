@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const deathParticle = preload("res://death.tscn")
+@onready var flash = $Sprite2D/FlashAnimation
 
 var input_vector : Vector2
 var acceleration = 200
@@ -12,21 +13,28 @@ const friction_weight = 0.1
 var collision_count : int = 0  # Collision counter
 
 func _process(delta):
-	if Input.is_action_just_pressed("U"):
+	if Collision.B1 and Collision.energy >= 50:
 		print("Shield Activated")
 		shield()
+		Collision.energy -= 50
 		#IF shield is already true print error message "already active"
-	if Input.is_action_just_pressed("I"):
+	if Collision.B2 and Collision.energy >= 30:
 		print("Speed Up Activated")
 		speed_up()
-	if Input.is_action_just_pressed("O"):
+		Collision.energy -= 30
+	if Collision.B3 and Collision.energy >= 70:
 		print("Shrink Activated")
 		shrink()
+		Collision.energy -= 70
+	if Collision.hit:
+		flash.play("flash")
+		Collision.hit = false
 	if Collision.shield:
 		$shield.visible = true
 	else:
 		$shield.visible = false
 	if Collision.lives <= 0:
+		Collision.dead = true
 		Kill()
 func shield():
 	$shieldTimer.start
@@ -74,3 +82,6 @@ func _on_speed_up_timer_timeout() -> void:
 func _on_shrink_timer_timeout() -> void:
 	scale.x = 1
 	scale.y = 1
+func _on_energy_timeout() -> void:
+	if Collision.energy < 100:
+		Collision.energy += 1

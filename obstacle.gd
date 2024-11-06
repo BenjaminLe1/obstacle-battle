@@ -10,6 +10,7 @@ func _physics_process(delta):
 			if Collision.shield:
 				Collision.shield = false
 			else:
+				Collision.hit = true
 				Collision.lives -= 1
 			queue_free()  # Destroy the obstacle on collision
 		else:

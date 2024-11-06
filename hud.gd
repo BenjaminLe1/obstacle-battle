@@ -6,4 +6,4 @@ var score = 0
 func _ready() -> void:
 	pass
 func _process(delta: float) -> void:
-	$collisioncount.text = "Lives: " + str(Collision.lives)
+	$collisioncount.text = "Lives: " + str(Collision.lives) + " Energy: " + str(Collision.energy)

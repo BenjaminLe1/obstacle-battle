@@ -29,21 +29,16 @@ func _process(delta):
 			shoot()
 		elif selection == \"Bomb\":
 			bomb()
-		elif selection == \"Missle\":
-			missle()			
 
-	#if Collision.B1:
-	if Input.is_action_just_pressed(\"U\"):
+	if Collision.B1:
 		selection = \"Main\"
 		print(\"Selected Main\")
-	#if Collision.B2:
-	if Input.is_action_just_pressed(\"I\"):
+	if Collision.B2:
 		selection = \"Bomb\"
 		print(\"Selected Bomb\")
-	#if Collision.B3:
-	if Input.is_action_just_pressed(\"O\"):
-		selection = \"Missle\"
-		print(\"Selected Missle\")
+	if Collision.B3 and Collision.special == 100:
+		missle()
+		print(\"Fired Missle\")
 	$Node2D.look_at(get_global_mouse_position())
 
 func shoot():
@@ -78,9 +73,8 @@ func missle():
 	var direction = (mid - missle.position).normalized()
 	var speed = 200
 	missle.velocity = direction*speed
-	
 
-
+var range = 2000 - 150
 var SPEED = 300
 func _physics_process(delta: float) -> void:
 	var directionx := Input.get_axis(\"A\", \"D\")
@@ -93,6 +87,11 @@ func _physics_process(delta: float) -> void:
 		velocity.y = directiony * SPEED
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
+	
+	#var x = Collision.X / range
+	#var y = Collision.Y / range
+	#position.x = x / 1280.0
+	#position.y = y / 720.0
 
 	move_and_slide()
 

@@ -1,13 +1,13 @@
 using Godot;
 using System;
 using System.IO.Ports;
+using System.Diagnostics;
 
 
 public partial class Connection : Node2D
 {
 	SerialPort serialPort;
 	RichTextLabel text;
-	string msg = "none";
 	int port = 0;
 
 	public override void _Ready()
@@ -23,9 +23,9 @@ public partial class Connection : Node2D
 	{
 		if(!serialPort.IsOpen) return;
 		string serialMessage = serialPort.ReadExisting();
-		msg = serialMessage;
-		//if(port == 1){
-			//serialPort.Write("1");
-		//}
+		text.Text = serialMessage;
+		if(port == 1){
+			serialPort.Write("1");
+		}
 	}
 }

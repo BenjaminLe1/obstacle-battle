@@ -12,4 +12,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if Collision.shield:
 			Collision.shield = false
 		else:
+			Collision.hit = true
 			Collision.lives -= 1

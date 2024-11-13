@@ -14,18 +14,23 @@ var collision_count : int = 0  # Collision counter
 
 func _process(delta):
 	if Collision.B1 and Collision.energy >= 50:
-		print("Shield Activated")
-		shield()
-		Collision.energy -= 50
-		#IF shield is already true print error message "already active"
+		if not Collision.shield:
+			print("Shield Activated")
+			shield()
+			Collision.energy -= 50
+		Collision.B1 = false
 	if Collision.B2 and Collision.energy >= 30:
-		print("Speed Up Activated")
-		speed_up()
-		Collision.energy -= 30
+		if not Collision.speed:
+			print("Speed Up Activated")
+			speed_up()
+			Collision.energy -= 30
+		Collision.B2 = false
 	if Collision.B3 and Collision.energy >= 70:
-		print("Shrink Activated")
-		shrink()
-		Collision.energy -= 70
+		if not Collision.shrink:
+			print("Shrink Activated")
+			shrink()
+			Collision.energy -= 70
+		Collision.B3 = false
 	if Collision.hit:
 		flash.play("flash")
 		Collision.hit = false
@@ -43,10 +48,13 @@ func speed_up():
 	$speed_upTimer.start
 	acceleration = 600
 	max_speed = 600
+	Collision.speed = true
 func shrink():
 	$shrinkTimer.start
 	scale.x = .5
 	scale.y = .5
+	Collision.shrink = true
+
 func Kill():
 	var _particle = deathParticle.instantiate()
 	_particle.position = global_position
@@ -70,18 +78,21 @@ func _physics_process(delta):
 			velocity.x = 0
 		if abs(velocity.y) <= 0.1:
 			velocity.y = 0
-
 	rotation += rotation_dir * rotation_speed * delta
 	move_and_slide()
+	
+	#UPDATE FOR JOYSTICK
 
 func _on_shield_timer_timeout() -> void:
 	Collision.shield = false
 func _on_speed_up_timer_timeout() -> void:
 	acceleration = 200
 	max_speed = 200
+	Collision.speed = false
 func _on_shrink_timer_timeout() -> void:
 	scale.x = 1
 	scale.y = 1
+	Collision.shrink = false
 func _on_energy_timeout() -> void:
 	if Collision.energy < 100:
 		Collision.energy += 1

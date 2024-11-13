@@ -25,7 +25,7 @@ public partial class Connection : Node2D
 		string serialMessage = serialPort.ReadExisting();
 		text.Text = serialMessage;
 		if(port == 1){
-			serialPort.Write("1");
+			serialPort.Write([p1, p2]); //[energy, special]
 		}
 	}
 }

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcbc0i0ehh12u"]
+
+[ext_resource type="Script" path="res://connection.cs" id="1_7m07l"]
+[ext_resource type="Script" path="res://rich_text_label.gd" id="2_hdx61"]
+
+[node name="Connection" type="Node2D"]
+script = ExtResource("1_7m07l")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 1276.0
+offset_bottom = 746.0
+script = ExtResource("2_hdx61")
+
+[node name="B1" type="Timer" parent="RichTextLabel"]
+
+[node name="B2" type="Timer" parent="RichTextLabel"]
+
+[node name="B3" type="Timer" parent="RichTextLabel"]
+
+[node name="pB1" type="Timer" parent="RichTextLabel"]
+
+[node name="pB2" type="Timer" parent="RichTextLabel"]
+
+[node name="pB3" type="Timer" parent="RichTextLabel"]
+
+[connection signal="timeout" from="RichTextLabel/B1" to="RichTextLabel" method="_on_b_1_timeout"]
+[connection signal="timeout" from="RichTextLabel/B2" to="RichTextLabel" method="_on_b_2_timeout"]
+[connection signal="timeout" from="RichTextLabel/B3" to="RichTextLabel" method="_on_b_3_timeout"]
+[connection signal="timeout" from="RichTextLabel/pB1" to="RichTextLabel" method="_on_p_b_1_timeout"]
+[connection signal="timeout" from="RichTextLabel/pB2" to="RichTextLabel" method="_on_p_b_2_timeout"]
+[connection signal="timeout" from="RichTextLabel/pB3" to="RichTextLabel" method="_on_p_b_3_timeout"]

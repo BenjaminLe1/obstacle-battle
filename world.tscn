@@ -23,16 +23,20 @@ const MisslePath = preload(\"res://guidedmissle.tscn\")
 var obstacle_speed = 400  # Adjust this value to change the speed of the projectile
 
 func _process(delta):
-	if Collision.B1:
+	if Collision.pB1:
 		shoot()
-		print(\"Selected Main\")
-	if (Collision.B2 or Input.is_action_just_pressed(\"I\")):
+		print(\"Shooting Main\")
+		Collision.pB1 = false
+	elif (Collision.pB2 or Input.is_action_just_pressed(\"I\")):
 		bomb()
-		print(\"Selected Bomb\")
-	if (Collision.B3 or Input.is_action_just_pressed(\"U\")) and Collision.special == 100:
+		print(\"Shooting Bomb\")
+		Collision.pB2 = false
+		
+	elif (Collision.pB3 or Input.is_action_just_pressed(\"U\")) and Collision.special == 100:
 		missle()
+		print(\"Shooting Missle\")
+		Collision.pB3 = false
 		Collision.special = 0
-		print(\"Fired Missle\")
 	$Node2D.look_at(get_global_mouse_position())
 
 func shoot():
@@ -93,7 +97,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group(\"Portal\"):
 		position.x = 1088
 		position.y = 128
-
 
 func _on_special_timeout() -> void:
 	if Collision.special < 100:

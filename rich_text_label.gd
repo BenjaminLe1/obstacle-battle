@@ -12,8 +12,6 @@ var rawText = "s"
 
 func msg(message):
 	rawText = message
-	print("works")
-func _ready() -> void:
 	if rawText == "B1\n" and b1:
 		print("B1 Pressed")
 		Collision.B1 = true
@@ -36,8 +34,8 @@ func _ready() -> void:
 		$pB1.start
 		pb1 = false
 	if rawText == "pB2\n" and pb2:
-		print("B2 Pressed")
-		Collision.B2 = true
+		print("pB2 Pressed")
+		Collision.pB2 = true
 		$pB2.start
 		pb2 = false
 	if rawText == "pB3\n" and pb3:
@@ -45,9 +43,12 @@ func _ready() -> void:
 		Collision.pB3 = true
 		$pB3.start
 		pb3 = false
+func _ready() -> void:
+	pass
 
 func _on_b_1_timeout() -> void:
 	b1 = true
+	print("END TIMER!")
 func _on_b_2_timeout() -> void:
 	b2 = true
 func _on_b_3_timeout() -> void:

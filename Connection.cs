@@ -3,7 +3,6 @@ using System;
 using System.IO.Ports;
 using System.Diagnostics;
 
-
 public partial class Connection : Node2D
 {
 	SerialPort serialPort;
@@ -15,7 +14,7 @@ public partial class Connection : Node2D
 		text = GetNode<RichTextLabel>("RichTextLabel");
 		serialPort = new SerialPort();
 		serialPort.PortName = "COM3";
-		serialPort.BaudRate = 9600;
+		serialPort.BaudRate = 115200;
 		serialPort.Open();
 	}
 
@@ -24,8 +23,13 @@ public partial class Connection : Node2D
 		if(!serialPort.IsOpen) return;
 		string serialMessage = serialPort.ReadExisting();
 		text.Text = serialMessage;
+		if (serialMessage == "B1\n"){
+			Console.WriteLine("Entered if");
+			//text.Call("msg", serialMessage);
+			Console.WriteLine(serialMessage);
+		}
 		if(port == 1){
-			serialPort.Write([p1, p2]); //[energy, special]
+			serialPort.Write("Colli"); //[energy, special]
 		}
 	}
 }

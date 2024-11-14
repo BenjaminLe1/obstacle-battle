@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcbc0i0ehh12u"]
 
-[ext_resource type="Script" path="res://connection.cs" id="1_7m07l"]
+[ext_resource type="Script" path="res://Connection.cs" id="1_0kxth"]
 [ext_resource type="Script" path="res://rich_text_label.gd" id="2_hdx61"]
 
 [node name="Connection" type="Node2D"]
-script = ExtResource("1_7m07l")
+script = ExtResource("1_0kxth")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_right = 1276.0

@@ -1,5 +1,7 @@
 extends Node
 
+var test = "test"
+
 var lives = 3
 var score = 0
 

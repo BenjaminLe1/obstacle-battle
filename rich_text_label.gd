@@ -8,9 +8,12 @@ var pb1 = true
 var pb2 = true
 var pb3 = true
 
+var rawText = "s"
+
+func msg(message):
+	rawText = message
+	print("works")
 func _ready() -> void:
-	var rawText = Connection.msg
-	print(rawText)
 	if rawText == "B1\n" and b1:
 		print("B1 Pressed")
 		Collision.B1 = true

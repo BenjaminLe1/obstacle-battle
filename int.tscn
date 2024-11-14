@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c5bx5b665fru8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true

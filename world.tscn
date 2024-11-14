@@ -28,7 +28,7 @@ func _process(delta):
 		shoot()
 		print(\"Shooting Main\")
 		Collision.pB1 = false
-	elif (Collision.pB2 or Input.is_action_just_pressed(\"I\")):
+	elif Collision.pB2:
 		bomb()
 		print(\"Shooting Bomb\")
 		Collision.pB2 = false

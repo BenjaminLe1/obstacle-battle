@@ -13,22 +13,22 @@ offset_bottom = 746.0
 script = ExtResource("2_hdx61")
 
 [node name="B1" type="Timer" parent="RichTextLabel"]
-autostart = true
+one_shot = true
 
 [node name="B2" type="Timer" parent="RichTextLabel"]
-autostart = true
+one_shot = true
 
 [node name="B3" type="Timer" parent="RichTextLabel"]
-autostart = true
+one_shot = true
 
 [node name="pB1" type="Timer" parent="RichTextLabel"]
-autostart = true
+one_shot = true
 
 [node name="pB2" type="Timer" parent="RichTextLabel"]
-autostart = true
+one_shot = true
 
 [node name="pB3" type="Timer" parent="RichTextLabel"]
-autostart = true
+one_shot = true
 
 [connection signal="timeout" from="RichTextLabel/B1" to="RichTextLabel" method="_on_b_1_timeout"]
 [connection signal="timeout" from="RichTextLabel/B2" to="RichTextLabel" method="_on_b_2_timeout"]

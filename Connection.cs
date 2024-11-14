@@ -23,11 +23,10 @@ public partial class Connection : Node2D
 		if(!serialPort.IsOpen) return;
 		string serialMessage = serialPort.ReadExisting();
 		text.Text = serialMessage;
-		//text.Call("msg", serialMessage);
-		
-		string pb1 = "B1(ir)?\\s";
-		string pb2 = "B2(ir)?\\s";
-		string pb3 = "B3(ir)?\\s";
+		string pb1 = @"\bB1\b";
+		string pb2 = @"\bB2\b";
+		string pb3 = @"\bB3\b";
+		string pY = "";
 		if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, pb1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			text.Call("msg", "pB1\n");
 		}

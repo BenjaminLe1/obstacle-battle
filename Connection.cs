@@ -37,7 +37,7 @@ public partial class Connection : Node2D
 			text.Call("msg", "pB3\n");
 		}
 		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, pY, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			Regex.Match(serialMessage, @"Y:(\d+)");
+			text.Call("msg", Regex.Match(serialMessage, @"Y:(\d+)").Groups[1].Value);
 		}
 		
 		

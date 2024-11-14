@@ -12,6 +12,7 @@ var rawText = ""
 
 func msg(message):
 	rawText = message
+	print(rawText)
 	if rawText == "B1\n" and b1:
 		print("B1 Pressed")
 		Collision.B1 = true

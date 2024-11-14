@@ -26,7 +26,7 @@ public partial class Connection : Node2D
 		string pb1 = @"\bB1\b";
 		string pb2 = @"\bB2\b";
 		string pb3 = @"\bB3\b";
-		string pY = "";
+		string pY = @"\bY:";
 		if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, pb1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			text.Call("msg", "pB1\n");
 		}
@@ -36,7 +36,9 @@ public partial class Connection : Node2D
 		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, pb3, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			text.Call("msg", "pB3\n");
 		}
-		
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, pY, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			Regex.Match(serialMessage, @"Y:(\d+)");
+		}
 		
 		
 		if(port == 1){

@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 Collision="*res://collision.gd"
-Connection="*res://connection.cs"
 
 [display]
 

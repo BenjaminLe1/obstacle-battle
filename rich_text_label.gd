@@ -10,40 +10,45 @@ var pb3 = true
 
 var rawText = ""
 
-func msg(message):
+func msg(message, button):
 	rawText = message
-	print(rawText)
-	if rawText == "B1\n" and b1:
-		print("B1 Pressed")
-		Collision.B1 = true
-		$B1.start()
-		b1 = false
-	if rawText == "B2\n" and b2:
-		print("B2 Pressed")
-		Collision.B2 = true
-		$B2.start()
-		b2 = false
-	if rawText == "B3\n" and b3:
-		print("B3 Pressed")
-		Collision.B3 = true
-		$B3.start()
-		b3 = false
-		
-	if rawText == "pB1\n" and pb1:
-		print("pB1 Pressed")
-		Collision.pB1 = true
-		$pB1.start()
-		pb1 = false
-	if rawText == "pB2\n" and pb2:
-		print("pB2 Pressed")
-		Collision.pB2 = true
-		$pB2.start()
-		pb2 = false
-	if rawText == "pB3\n" and pb3:
-		print("pB3 Pressed")
-		Collision.pB3 = true
-		$pB3.start()
-		pb3 = false
+	if button:
+		if rawText == "B1\n" and b1:
+			print("B1 Pressed")
+			Collision.B1 = true
+			$B1.start()
+			b1 = false
+		if rawText == "B2\n" and b2:
+			print("B2 Pressed")
+			Collision.B2 = true
+			$B2.start()
+			b2 = false
+		if rawText == "B3\n" and b3:
+			print("B3 Pressed")
+			Collision.B3 = true
+			$B3.start()
+			b3 = false
+			
+		if rawText == "pB1\n" and pb1:
+			print("pB1 Pressed")
+			Collision.pB1 = true
+			$pB1.start()
+			pb1 = false
+		if rawText == "pB2\n" and pb2:
+			print("pB2 Pressed")
+			Collision.pB2 = true
+			$pB2.start()
+			pb2 = false
+		if rawText == "pB3\n" and pb3:
+			print("pB3 Pressed")
+			Collision.pB3 = true
+			$pB3.start()
+			pb3 = false
+	else:
+		Collision.pY = int(rawText)
+
+func getReturn():
+	return Collision.energy + ":" + Collision.special
 
 func _on_b_1_timeout() -> void:
 	b1 = true

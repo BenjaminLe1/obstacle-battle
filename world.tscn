@@ -31,7 +31,7 @@ func _process(delta):
 		print(\"Shooting Bomb\")
 		Collision.pB2 = false
 		
-	elif Input.is_action_just_pressed(\"U\"): #Collision.pB3 and Collision.special == 100:
+	elif Collision.pB3 and Collision.special == 100:
 		missle()
 		print(\"Shooting Missle\")
 		Collision.pB3 = false

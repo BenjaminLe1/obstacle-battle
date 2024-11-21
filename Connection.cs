@@ -14,8 +14,8 @@ public partial class Connection : Node2D
 	{
 		text = GetNode<RichTextLabel>("RichTextLabel");
 		serialPort = new SerialPort();
-		serialPort.PortName = "COM3";
-		serialPort.BaudRate = 115200;
+		serialPort.PortName = "COM7";
+		serialPort.BaudRate = 19200;
 		serialPort.Open();
 		
 		serialPort2 = new SerialPort();
@@ -28,6 +28,7 @@ public partial class Connection : Node2D
 	{
 		//if(!serialPort.IsOpen) return;
 		string serialMessage = serialPort.ReadExisting();
+		
 		text.Text = serialMessage;
 		string b1 = @"\bB1\b";
 		string b2 = @"\bB2\b";
@@ -49,6 +50,7 @@ public partial class Connection : Node2D
 		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			text.Call("msg", System.Text.RegularExpressions.Regex.Match(serialMessage, @"Y:(\d+)").Groups[1].Value, "Y");
 		}
+		serialPort.Write(text.Call("getReturn").ToString());
 		
 		string serialMessage2 = serialPort2.ReadExisting();
 		text.Text = serialMessage2;
@@ -57,6 +59,7 @@ public partial class Connection : Node2D
 		string pb3 = @"\bB3\b";
 		string pX = @"\bX:";
 		string pY = @"\bY:";
+		
 		if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage2, pb1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			text.Call("msg2", "pB1\n", "B");
 		}
@@ -72,8 +75,6 @@ public partial class Connection : Node2D
 		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage2, pY, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			text.Call("msg2", System.Text.RegularExpressions.Regex.Match(serialMessage, @"Y:(\d+)").Groups[1].Value, "Y");
 		}
-		
-		serialPort.Write(text.Call("getReturn").ToString()); //energy:special
 		serialPort2.Write(text.Call("getReturn2").ToString()); //energy:special
 	}
 }

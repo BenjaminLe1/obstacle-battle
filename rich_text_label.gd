@@ -7,7 +7,8 @@ var b3 = true
 var pb1 = true
 var pb2 = true
 var pb3 = true
-
+func print(msg):
+	print(msg)
 func msg(message, type):
 	if type == "B":
 		if message == "B1\n" and b1:
@@ -51,7 +52,7 @@ func msg2(message, type):
 	elif type == "Y":
 		Collision.pY = int(message)
 func getReturn():
-	return str(Collision.energy)
+	return str(Collision.lives)
 func getReturn2():
 	return str(Collision.special)
 

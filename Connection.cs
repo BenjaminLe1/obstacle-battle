@@ -38,14 +38,14 @@ public partial class Connection : Node2D
 			text.Call("msg", "pB3\n", true);
 		}
 		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, pX, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			text.Call("msg", Regex.Match(serialMessage, @"X:(\d+)").Groups[1].Value, false);
+			text.Call("msg", System.Text.RegularExpressions.Regex.Match(serialMessage, @"X:(\d+)").Groups[1].Value, false);
 		}
 		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, pY, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			text.Call("msg", Regex.Match(serialMessage, @"Y:(\d+)").Groups[1].Value, false);
+			text.Call("msg", System.Text.RegularExpressions.Regex.Match(serialMessage, @"Y:(\d+)").Groups[1].Value, false);
 		}
 		
 		if(port == 1){
-			serialPort.Write(text.Call("getReturn")); //energy:special
+			serialPort.Write(text.Call("getReturn").ToString()); //energy:special
 		}
 	}
 }

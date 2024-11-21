@@ -48,7 +48,7 @@ func msg(message, button):
 		Collision.pY = int(rawText)
 
 func getReturn():
-	return Collision.energy + ":" + Collision.special
+	return str(Collision.energy) + ":" + str(Collision.special)
 
 func _on_b_1_timeout() -> void:
 	b1 = true

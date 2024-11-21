@@ -26,10 +26,12 @@ func msg(message, type):
 			Collision.B3 = true
 			$B3.start()
 			b3 = false
-	elif type == "X":
-		Collision.X = int(message)
-	elif type == "Y":
-		Collision.Y = int(message)
+	elif type == "X": #0 - 4000
+		if int(message) < 1900 or int(message) > 2100:
+			Collision.X = int(message)
+	elif type == "Y": #0 - 4000
+		if int(message) < 1900 or int(message) > 2100:
+			Collision.Y = int(message)
 func msg2(message, type):
 	if type == "B":
 		if message == "pB1\n" and pb1:
@@ -47,15 +49,16 @@ func msg2(message, type):
 			Collision.pB3 = true
 			$pB3.start()
 			pb3 = false
-	elif type == "X":
-		Collision.pX = int(message)
-	elif type == "Y":
-		Collision.pY = int(message)
+	elif type == "X": #0 - 4000
+		if int(message) < 1700 or int(message) > 2200:
+			Collision.pX = int(message)
+	elif type == "Y": #0 - 4000
+		if int(message) < 1700 or int(message) > 2200:
+			Collision.pY = int(message)
 func getReturn():
 	return str(Collision.lives)
 func getReturn2():
 	return str(Collision.lives)
-
 func _on_b_1_timeout() -> void:
 	b1 = true
 func _on_b_2_timeout() -> void:

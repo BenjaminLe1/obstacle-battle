@@ -19,8 +19,8 @@ public partial class Connection : Node2D
 		serialPort.Open();
 		
 		serialPort2 = new SerialPort();
-		serialPort2.PortName = "COM4";
-		serialPort2.BaudRate = 115200;
+		serialPort2.PortName = "COM3";
+		serialPort2.BaudRate = 19200;
 		serialPort2.Open();
 	}
 

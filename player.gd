@@ -43,7 +43,6 @@ func _process(delta):
 		Kill()
 		get_tree().change_scene_to_packed(game_over)
 
-		
 func shield():
 	$shieldTimer.start
 	Collision.shield = true

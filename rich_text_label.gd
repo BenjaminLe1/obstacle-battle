@@ -54,7 +54,7 @@ func msg2(message, type):
 func getReturn():
 	return str(Collision.lives)
 func getReturn2():
-	return str(Collision.special)
+	return str(Collision.lives)
 
 func _on_b_1_timeout() -> void:
 	b1 = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://camt2om73uxxu"]
+[gd_scene load_steps=13 format=3 uid="uid://camt2om73uxxu"]
 
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
@@ -10,10 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://dcbc0i0ehh12u" path="res://connection.tscn" id="8_ici5c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wb73"]
-size = Vector2(1299, 27)
+size = Vector2(1292, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqj0y"]
-size = Vector2(25, 754)
+size = Vector2(6, 732)
 
 [sub_resource type="GDScript" id="GDScript_qlby5"]
 script/source = "extends CharacterBody2D
@@ -28,7 +28,7 @@ func _process(delta):
 		shoot()
 		print(\"Shooting Main\")
 		Collision.pB1 = false
-	elif (Collision.pB2 or Input.is_action_just_pressed(\"I\")):
+	elif Collision.pB2:
 		bomb()
 		print(\"Shooting Bomb\")
 		Collision.pB2 = false
@@ -73,39 +73,54 @@ func missle():
 	var speed = 200
 	missle.velocity = direction*speed
 
-var range = 2000 - 150
 var SPEED = 300
 func _physics_process(delta: float) -> void:
-	var directionx := Input.get_axis(\"A\", \"D\")
-	if directionx:
-		velocity.x = directionx * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	var directiony := Input.get_axis(\"W\", \"S\")
-	if directiony:
-		velocity.y = directiony * SPEED
-	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+	#var directionx := Input.get_axis(\"A\", \"D\")
+	#if directionx:
+		#velocity.x = directionx * SPEED
+	#else:
+		#velocity.x = move_toward(velocity.x, 0, SPEED)
+	#var directiony := Input.get_axis(\"W\", \"S\")
+	#if directiony:
+		#velocity.y = directiony * SPEED
+	#else:
+		#velocity.y = move_toward(velocity.y, 0, SPEED)
 	
-	#var x = Collision.X / range
-	#var y = Collision.Y / range
-	#position.x = x / 1280.0
-	#position.y = y / 720.0
-
+	var x = Collision.pX / 7.0
+	var y = Collision.pY / 7.0
+	if x == 0: #LEFT
+		position.x = 0
+		position.y = int(y / 720.0)
+		$Node2D/Marker2D.position.x = 1
+		$Node2D/Marker2D.position.y = 0
+	elif x == 7: #RIGHT
+		position.x = 1280
+		position.y = int(y / 720.0)
+		$Node2D/Marker2D.position.x = -1
+		$Node2D/Marker2D.position.y = 0
+	elif y == 0: #UP
+		position.x = int(x / 1280.0)
+		position.y == 0
+		$Node2D/Marker2D.position.x = 0
+		$Node2D/Marker2D.position.y = -1
+	elif y == 7: #DOWN
+		position.x = int(x / 1280.0)
+		position.y == 720
+		$Node2D/Marker2D.position.x = 0
+		$Node2D/Marker2D.position.y = 1
 	move_and_slide()
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group(\"Portal\"):
-		position.x = 1088
-		position.y = 128
 
 func _on_special_timeout() -> void:
 	if Collision.special < 100:
 		Collision.special += 1
+		
+#func _on_area_2d_area_entered(area: Area2D) -> void:
+	#if area.is_in_group(\"Portal\"):
+		#position.x = 1088
+		#position.y = 128
 "
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxvxm"]
-size = Vector2(76, 72)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y7h2h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0goox"]
 bg_color = Color(0.000646265, 0.00063119, 0.00125989, 1)
@@ -114,10 +129,10 @@ bg_color = Color(0.000646265, 0.00063119, 0.00125989, 1)
 position = Vector2(0, 2)
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -136.0
-offset_top = -134.0
-offset_right = 1424.0
-offset_bottom = 915.0
+offset_left = -143.0
+offset_top = -163.0
+offset_right = 1462.0
+offset_bottom = 921.0
 texture = ExtResource("1_8m3x3")
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_wrisp")]
@@ -126,56 +141,48 @@ position = Vector2(640, 360)
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Border"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(638, -1)
+position = Vector2(640, -3)
 shape = SubResource("RectangleShape2D_1wb73")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(642.5, 726.5)
+position = Vector2(640, 723)
 shape = SubResource("RectangleShape2D_1wb73")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1278.25, 363.25)
+position = Vector2(1283, 360)
 shape = SubResource("RectangleShape2D_mqj0y")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0.5, 362)
+position = Vector2(-3, 360)
 shape = SubResource("RectangleShape2D_mqj0y")
 
 [node name="Sprite2D" parent="." instance=ExtResource("2_r7unl")]
-position = Vector2(369, 252)
+position = Vector2(316, 308)
 scale = Vector2(0.132857, 0.134286)
 
 [node name="Sprite2D2" parent="." instance=ExtResource("2_r7unl")]
-position = Vector2(841, 222)
+position = Vector2(884, 217)
 scale = Vector2(0.182857, 0.185714)
 
 [node name="Sprite2D3" parent="." instance=ExtResource("2_r7unl")]
-position = Vector2(400, 495)
+position = Vector2(686, 536)
 scale = Vector2(0.144286, 0.141428)
 
 [node name="player2" type="CharacterBody2D" parent="."]
-position = Vector2(138, 522)
 script = SubResource("GDScript_qlby5")
 
 [node name="Sprite2D" type="Sprite2D" parent="player2"]
-position = Vector2(-0.812513, 0)
+position = Vector2(-3.9061e-07, -0.208233)
 rotation = 1.5708
-scale = Vector2(0.637695, 0.587891)
-texture = ExtResource("2_3y5vq")
+scale = Vector2(0.05, 0.05)
+texture = SubResource("PlaceholderTexture2D_y7h2h")
 
 [node name="Node2D" type="Node2D" parent="player2"]
-position = Vector2(40, 0)
+position = Vector2(1, 0)
 scale = Vector2(1.08472, 0.921899)
 
 [node name="Marker2D" type="Marker2D" parent="player2/Node2D"]
 position = Vector2(1.19209e-06, -6.79493e-06)
-
-[node name="Area2D" type="Area2D" parent="player2"]
-position = Vector2(-1, 0)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player2/Area2D"]
-position = Vector2(-2, 1)
-shape = SubResource("RectangleShape2D_sxvxm")
 
 [node name="special" type="Timer" parent="player2"]
 wait_time = 0.2
@@ -200,5 +207,4 @@ script = ExtResource("7_j2vvg")
 
 [node name="Connection" parent="." instance=ExtResource("8_ici5c")]
 
-[connection signal="area_entered" from="player2/Area2D" to="player2" method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="player2/special" to="player2" method="_on_special_timeout"]

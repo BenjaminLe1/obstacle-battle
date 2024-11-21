@@ -1,12 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://camt2om73uxxu"]
+[gd_scene load_steps=11 format=3 uid="uid://camt2om73uxxu"]
 
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
-[ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="2_3y5vq"]
-[ext_resource type="PackedScene" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
 [ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
-[ext_resource type="Script" path="res://energy_bar.gd" id="7_j2vvg"]
 [ext_resource type="PackedScene" uid="uid://dcbc0i0ehh12u" path="res://connection.tscn" id="8_ici5c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wb73"]
@@ -33,7 +31,7 @@ func _process(delta):
 		print(\"Shooting Bomb\")
 		Collision.pB2 = false
 		
-	elif (Input.is_action_just_pressed(\"U\")):
+	elif Input.is_action_just_pressed(\"U\"): #Collision.pB3 and Collision.special == 100:
 		missle()
 		print(\"Shooting Missle\")
 		Collision.pB3 = false
@@ -122,16 +120,13 @@ func _on_special_timeout() -> void:
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y7h2h"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0goox"]
-bg_color = Color(0.000646265, 0.00063119, 0.00125989, 1)
-
 [node name="world" type="Node2D" groups=["player"]]
 position = Vector2(0, 2)
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -143.0
+offset_left = -129.0
 offset_top = -163.0
-offset_right = 1462.0
+offset_right = 1476.0
 offset_bottom = 921.0
 texture = ExtResource("1_8m3x3")
 
@@ -169,6 +164,7 @@ position = Vector2(686, 536)
 scale = Vector2(0.144286, 0.141428)
 
 [node name="player2" type="CharacterBody2D" parent="."]
+position = Vector2(114, 612)
 script = SubResource("GDScript_qlby5")
 
 [node name="Sprite2D" type="Sprite2D" parent="player2"]
@@ -178,10 +174,12 @@ scale = Vector2(0.05, 0.05)
 texture = SubResource("PlaceholderTexture2D_y7h2h")
 
 [node name="Node2D" type="Node2D" parent="player2"]
+visible = false
 position = Vector2(1, 0)
 scale = Vector2(1.08472, 0.921899)
 
 [node name="Marker2D" type="Marker2D" parent="player2/Node2D"]
+visible = false
 position = Vector2(1.19209e-06, -6.79493e-06)
 
 [node name="special" type="Timer" parent="player2"]
@@ -194,17 +192,9 @@ position = Vector2(640, 360)
 [node name="HUD" parent="." instance=ExtResource("5_3khpd")]
 
 [node name="Control" parent="HUD" instance=ExtResource("6_ue8mf")]
-
-[node name="ProgressBar" type="ProgressBar" parent="HUD"]
-offset_top = 68.0
-offset_right = 239.0
-offset_bottom = 95.0
-theme_override_styles/background = SubResource("StyleBoxFlat_0goox")
-value = 100.0
-fill_mode = 1
-show_percentage = false
-script = ExtResource("7_j2vvg")
+visible = false
 
 [node name="Connection" parent="." instance=ExtResource("8_ici5c")]
+position = Vector2(0, -2)
 
 [connection signal="timeout" from="player2/special" to="player2" method="_on_special_timeout"]

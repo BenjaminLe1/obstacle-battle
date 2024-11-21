@@ -8,47 +8,52 @@ var pb1 = true
 var pb2 = true
 var pb3 = true
 
-var rawText = ""
-
-func msg(message, button):
-	rawText = message
-	if button:
-		if rawText == "B1\n" and b1:
+func msg(message, type):
+	if type == "B":
+		if message == "B1\n" and b1:
 			print("B1 Pressed")
 			Collision.B1 = true
 			$B1.start()
 			b1 = false
-		if rawText == "B2\n" and b2:
+		if message == "B2\n" and b2:
 			print("B2 Pressed")
 			Collision.B2 = true
 			$B2.start()
 			b2 = false
-		if rawText == "B3\n" and b3:
+		if message == "B3\n" and b3:
 			print("B3 Pressed")
 			Collision.B3 = true
 			$B3.start()
 			b3 = false
-			
-		if rawText == "pB1\n" and pb1:
+	elif type == "X":
+		Collision.X = int(message)
+	elif type == "Y":
+		Collision.Y = int(message)
+func msg2(message, type):
+	if type == "B":
+		if message == "pB1\n" and pb1:
 			print("pB1 Pressed")
 			Collision.pB1 = true
 			$pB1.start()
 			pb1 = false
-		if rawText == "pB2\n" and pb2:
+		if message == "pB2\n" and pb2:
 			print("pB2 Pressed")
 			Collision.pB2 = true
 			$pB2.start()
 			pb2 = false
-		if rawText == "pB3\n" and pb3:
+		if message == "pB3\n" and pb3:
 			print("pB3 Pressed")
 			Collision.pB3 = true
 			$pB3.start()
 			pb3 = false
-	else:
-		Collision.pY = int(rawText)
-
+	elif type == "X":
+		Collision.pX = int(message)
+	elif type == "Y":
+		Collision.pY = int(message)
 func getReturn():
-	return str(Collision.energy) + ":" + str(Collision.special)
+	return str(Collision.energy)
+func getReturn2():
+	return str(Collision.special)
 
 func _on_b_1_timeout() -> void:
 	b1 = true

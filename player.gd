@@ -13,19 +13,19 @@ const friction_weight = 0.1
 var collision_count : int = 0  # Collision counter
 
 func _process(delta):
-	if Input.is_action_just_pressed("M"): #Collision.B1 and Collision.energy >= 50:
+	if Collision.B1 and Collision.energy >= 50:
 		if not Collision.shield:
 			print("Shield Activated")
 			shield()
 			Collision.energy -= 50
 		Collision.B1 = false
-	if Input.is_action_just_pressed("N"):#Collision.B2 and Collision.energy >= 30:
+	if Collision.B2 and Collision.energy >= 30:
 		if not Collision.speed:
 			print("Speed Up Activated")
 			speed_up()
 			Collision.energy -= 30
 		Collision.B2 = false
-	if Input.is_action_just_pressed("B"):#Collision.B3 and Collision.energy >= 70:
+	if Collision.B3 and Collision.energy >= 70:
 		if not Collision.shrink:
 			print("Shrink Activated")
 			shrink()

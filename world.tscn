@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
 [ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="2_3y5vq"]
-[ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="PackedScene" path="res://meteor1.tscn" id="2_r7unl"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
 [ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
 [ext_resource type="Script" path="res://energy_bar.gd" id="7_j2vvg"]
@@ -33,7 +33,7 @@ func _process(delta):
 		print(\"Shooting Bomb\")
 		Collision.pB2 = false
 		
-	elif (Collision.pB3 or Input.is_action_just_pressed(\"U\")) and Collision.special == 100:
+	elif (Input.is_action_just_pressed(\"U\")):
 		missle()
 		print(\"Shooting Missle\")
 		Collision.pB3 = false
@@ -111,6 +111,7 @@ size = Vector2(76, 72)
 bg_color = Color(0.000646265, 0.00063119, 0.00125989, 1)
 
 [node name="world" type="Node2D" groups=["player"]]
+position = Vector2(0, 2)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_left = -136.0

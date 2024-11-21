@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 const deathParticle = preload("res://death.tscn")
+@export var game_over =  preload("res://game_over.tscn") as PackedScene
 @onready var flash = $Sprite2D/FlashAnimation
 
 var input_vector : Vector2
@@ -9,23 +10,22 @@ var max_speed = 200
 var rotation_dir : int
 const rotation_speed = 3
 const friction_weight = 0.1
-
 var collision_count : int = 0  # Collision counter
 
 func _process(delta):
-	if Collision.B1 and Collision.energy >= 50:
+	if Input.is_action_just_pressed("M"): #Collision.B1 and Collision.energy >= 50:
 		if not Collision.shield:
 			print("Shield Activated")
 			shield()
 			Collision.energy -= 50
 		Collision.B1 = false
-	if Collision.B2 and Collision.energy >= 30:
+	if Input.is_action_just_pressed("N"):#Collision.B2 and Collision.energy >= 30:
 		if not Collision.speed:
 			print("Speed Up Activated")
 			speed_up()
 			Collision.energy -= 30
 		Collision.B2 = false
-	if Collision.B3 and Collision.energy >= 70:
+	if Input.is_action_just_pressed("B"):#Collision.B3 and Collision.energy >= 70:
 		if not Collision.shrink:
 			print("Shrink Activated")
 			shrink()
@@ -41,6 +41,9 @@ func _process(delta):
 	if Collision.lives <= 0:
 		Collision.dead = true
 		Kill()
+		get_tree().change_scene_to_packed(game_over)
+
+		
 func shield():
 	$shieldTimer.start
 	Collision.shield = true

@@ -30,13 +30,12 @@ func msg(message, type):
 		if int(message) < 1700 or int(message) > 2200:
 			Collision.X = int(message)
 		else:
-			Collision.X = 2000
-			
+			Collision.X = 0
 	elif type == "Y": #0 - 4000
 		if int(message) < 1700 or int(message) > 2200:
 			Collision.Y = int(message)
 		else:
-			Collision.Y = 2000
+			Collision.Y = 0
 func msg2(message, type):
 	if type == "B":
 		if message == "pB1\n" and pb1:
@@ -58,12 +57,12 @@ func msg2(message, type):
 		if int(message) < 1700 or int(message) > 2200:
 			Collision.pX = int(message)
 		else:
-			Collision.pX = 2000
+			Collision.pX = 0
 	elif type == "Y": #0 - 4000
 		if int(message) < 1700 or int(message) > 2200:
 			Collision.pY = int(message)
 		else:
-			Collision.pY = 2000
+			Collision.pY = 0
 func getReturn():
 	return str(Collision.lives)
 func getReturn2():

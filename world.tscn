@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
 [ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="4_xd5uk"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
 [ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
 [ext_resource type="PackedScene" uid="uid://dcbc0i0ehh12u" path="res://connection.tscn" id="8_ici5c"]
@@ -30,12 +31,12 @@ func _process(delta):
 		bomb()
 		print(\"Shooting Bomb\")
 		Collision.pB2 = false
-		
-	elif Collision.pB3 and Collision.special == 100:
-		missle()
-		print(\"Shooting Missle\")
+	elif Collision.pB3:
+		if Collision.special == 100:
+			missle()
+			print(\"Shooting Missle\")
+			Collision.special = 0
 		Collision.pB3 = false
-		Collision.special = 0
 	$Node2D.look_at(get_global_mouse_position())
 
 func shoot():
@@ -83,29 +84,35 @@ func _physics_process(delta: float) -> void:
 		#velocity.y = directiony * SPEED
 	#else:
 		#velocity.y = move_toward(velocity.y, 0, SPEED)
-	
-	var x = Collision.pX / 4000
-	var y = Collision.pY / 4000
-	if x < .05: #LEFT
-		position.x = 0
-		position.y = int(y / 720.0)
-		$Node2D/Marker2D.position.x = 1
-		$Node2D/Marker2D.position.y = 0
-	elif x > .95: #RIGHT
+	#LEFT IS 6 RIGHT IS 1
+	#UP IS 6 DOWN IS 1
+	var x = Collision.pX / 6.0
+	var y = Collision.pY / 6.0
+	if Collision.pX == 0:
+		x = .5
+	if Collision.pY == 0:
+		y = .5
+	print(str(x) + \":\" + str(y))
+	if Collision.pX == 6: #LEFT
 		position.x = 1280
-		position.y = int(y / 720.0)
-		$Node2D/Marker2D.position.x = -1
-		$Node2D/Marker2D.position.y = 0
-	elif y < .05: #UP
-		position.x = int(x / 1280.0)
-		position.y == 0
-		$Node2D/Marker2D.position.x = 0
-		$Node2D/Marker2D.position.y = -1
-	elif y > .95: #DOWN
-		position.x = int(x / 1280.0)
-		position.y == 720
-		$Node2D/Marker2D.position.x = 0
-		$Node2D/Marker2D.position.y = 1
+		position.y = int(y * 720.0)
+		$Node2D/Marker2D.position.x = -20
+		$Node2D/Marker2D.position.y = 20
+	elif Collision.pX == 1: #RIGHT
+		position.x = 0
+		position.y = int(y * 720.0)
+		$Node2D/Marker2D.position.x = 20
+		$Node2D/Marker2D.position.y = 20
+	elif Collision.pY == 6: #UP
+		position.x = int(x * 1280.0)
+		position.y = 720
+		$Node2D/Marker2D.position.x = 20
+		$Node2D/Marker2D.position.y = -20
+	elif Collision.pY == 1: #DOWN
+		position.x = int(x * 1280.0)
+		position.y = 0
+		$Node2D/Marker2D.position.x = 20
+		$Node2D/Marker2D.position.y = 20
 	move_and_slide()
 
 func _on_special_timeout() -> void:
@@ -118,16 +125,14 @@ func _on_special_timeout() -> void:
 		#position.y = 128
 "
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y7h2h"]
-
 [node name="world" type="Node2D" groups=["player"]]
 position = Vector2(0, 2)
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_left = -129.0
-offset_top = -163.0
-offset_right = 1476.0
-offset_bottom = 921.0
+offset_left = -131.0
+offset_top = -136.0
+offset_right = 1474.0
+offset_bottom = 948.0
 texture = ExtResource("1_8m3x3")
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_wrisp")]
@@ -138,6 +143,7 @@ position = Vector2(640, 360)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(640, -3)
 shape = SubResource("RectangleShape2D_1wb73")
+one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(640, 723)
@@ -170,8 +176,8 @@ script = SubResource("GDScript_qlby5")
 [node name="Sprite2D" type="Sprite2D" parent="player2"]
 position = Vector2(-3.9061e-07, -0.208233)
 rotation = 1.5708
-scale = Vector2(0.05, 0.05)
-texture = SubResource("PlaceholderTexture2D_y7h2h")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_xd5uk")
 
 [node name="Node2D" type="Node2D" parent="player2"]
 visible = false

@@ -2,7 +2,7 @@ extends Node
 
 var test = "test"
 
-var lives = 3
+var lives = 100
 var score = 0
 
 var shield = false
@@ -15,16 +15,16 @@ var dead = false
 var B1 = false
 var B2 = false
 var B3 = false
-var X = 2000
-var Y = 2000
+var X = 0
+var Y = 0
 var energy = 0
 
 #PLAYER 2
 var pB1 = false
 var pB2 = false
 var pB3 = false
-var pX = 2000
-var pY = 2000
+var pX = 0
+var pY = 0
 var special = 0
 
 #Send back data

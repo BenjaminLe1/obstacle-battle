@@ -13,20 +13,20 @@ const friction_weight = 0.1
 var collision_count : int = 0  # Collision counter
 
 func _process(delta):
-	if Collision.B1 and Collision.energy >= 50:
-		if not Collision.shield:
+	if Collision.B1:
+		if not Collision.shield and Collision.energy >= 50:
 			print("Shield Activated")
 			shield()
 			Collision.energy -= 50
 		Collision.B1 = false
-	if Collision.B2 and Collision.energy >= 30:
-		if not Collision.speed:
+	if Collision.B2:
+		if not Collision.speed and Collision.energy >= 30:
 			print("Speed Up Activated")
 			speed_up()
 			Collision.energy -= 30
 		Collision.B2 = false
-	if Collision.B3 and Collision.energy >= 70:
-		if not Collision.shrink:
+	if Collision.B3: 
+		if not Collision.shrink and Collision.energy >= 70:
 			print("Shrink Activated")
 			shrink()
 			Collision.energy -= 70
@@ -84,19 +84,18 @@ func _physics_process(delta):
 	#move_and_slide()
 	
 	#UPDATE FOR JOYSTICK
-	var gx = Collision.X - 2000
-	var gy = Collision.Y - 2000
-	if gy > 0:
+	var gx = Collision.X# - 2000
+	var gy = Collision.Y# - 2000
+	#print(str(gx) + ":" + str(gy))
+	if gy >= 4:
 		input_vector.x = 1
 	else:
 		input_vector.x = 0
 	rotation_dir = 0
-	if gx > 0:
-		rotation_dir += 1
-	elif gx < 0:
+	if gx >= 4:
 		rotation_dir += -1
-	else:
-		rotation_dir = 0
+	elif gx < 3 and gx > 0:
+		rotation_dir += 1
 	velocity += Vector2(input_vector.x * acceleration * delta, 0).rotated(rotation)
 	velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	velocity.y = clamp(velocity.y, -max_speed, max_speed)

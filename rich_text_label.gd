@@ -57,9 +57,13 @@ func msg2(message, type):
 	elif type == "X": #0 - 4000
 		if int(message) < 1700 or int(message) > 2200:
 			Collision.pX = int(message)
+		else:
+			Collision.pX = 2000
 	elif type == "Y": #0 - 4000
 		if int(message) < 1700 or int(message) > 2200:
 			Collision.pY = int(message)
+		else:
+			Collision.pY = 2000
 func getReturn():
 	return str(Collision.lives)
 func getReturn2():

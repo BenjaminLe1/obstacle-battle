@@ -27,11 +27,16 @@ func msg(message, type):
 			$B3.start()
 			b3 = false
 	elif type == "X": #0 - 4000
-		if int(message) < 1900 or int(message) > 2100:
+		if int(message) < 1700 or int(message) > 2200:
 			Collision.X = int(message)
+		else:
+			Collision.X = 2000
+			
 	elif type == "Y": #0 - 4000
-		if int(message) < 1900 or int(message) > 2100:
+		if int(message) < 1700 or int(message) > 2200:
 			Collision.Y = int(message)
+		else:
+			Collision.Y = 2000
 func msg2(message, type):
 	if type == "B":
 		if message == "pB1\n" and pb1:

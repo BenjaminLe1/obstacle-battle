@@ -63,6 +63,12 @@ func msg2(message, type):
 			Collision.pY = int(message)
 		else:
 			Collision.pY = 0
+func hit():
+	if Collision.hit2:
+		Collision.hit2 = false
+		return "HIT"
+	else:
+		return ""
 func getReturn():
 	return str(Collision.lives)
 func getReturn2():

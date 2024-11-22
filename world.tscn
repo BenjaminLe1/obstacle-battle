@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://camt2om73uxxu"]
+[gd_scene load_steps=10 format=3 uid="uid://camt2om73uxxu"]
 
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
 [ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
-[ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="4_xd5uk"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
 [ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
 [ext_resource type="PackedScene" uid="uid://dcbc0i0ehh12u" path="res://connection.tscn" id="8_ici5c"]
@@ -74,16 +73,6 @@ func missle():
 
 var SPEED = 300
 func _physics_process(delta: float) -> void:
-	#var directionx := Input.get_axis(\"A\", \"D\")
-	#if directionx:
-		#velocity.x = directionx * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-	#var directiony := Input.get_axis(\"W\", \"S\")
-	#if directiony:
-		#velocity.y = directiony * SPEED
-	#else:
-		#velocity.y = move_toward(velocity.y, 0, SPEED)
 	#LEFT IS 6 RIGHT IS 1
 	#UP IS 6 DOWN IS 1
 	var x = Collision.pX / 6.0
@@ -92,27 +81,18 @@ func _physics_process(delta: float) -> void:
 		x = .5
 	if Collision.pY == 0:
 		y = .5
-	print(str(x) + \":\" + str(y))
 	if Collision.pX == 6: #LEFT
 		position.x = 1280
 		position.y = int(y * 720.0)
-		$Node2D/Marker2D.position.x = -20
-		$Node2D/Marker2D.position.y = 20
 	elif Collision.pX == 1: #RIGHT
 		position.x = 0
 		position.y = int(y * 720.0)
-		$Node2D/Marker2D.position.x = 20
-		$Node2D/Marker2D.position.y = 20
 	elif Collision.pY == 6: #UP
 		position.x = int(x * 1280.0)
 		position.y = 720
-		$Node2D/Marker2D.position.x = 20
-		$Node2D/Marker2D.position.y = -20
 	elif Collision.pY == 1: #DOWN
 		position.x = int(x * 1280.0)
 		position.y = 0
-		$Node2D/Marker2D.position.x = 20
-		$Node2D/Marker2D.position.y = 20
 	move_and_slide()
 
 func _on_special_timeout() -> void:
@@ -173,19 +153,11 @@ scale = Vector2(0.144286, 0.141428)
 position = Vector2(114, 612)
 script = SubResource("GDScript_qlby5")
 
-[node name="Sprite2D" type="Sprite2D" parent="player2"]
-position = Vector2(-3.9061e-07, -0.208233)
-rotation = 1.5708
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_xd5uk")
-
 [node name="Node2D" type="Node2D" parent="player2"]
-visible = false
 position = Vector2(1, 0)
 scale = Vector2(1.08472, 0.921899)
 
 [node name="Marker2D" type="Marker2D" parent="player2/Node2D"]
-visible = false
 position = Vector2(1.19209e-06, -6.79493e-06)
 
 [node name="special" type="Timer" parent="player2"]

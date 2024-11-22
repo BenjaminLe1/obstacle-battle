@@ -34,6 +34,7 @@ func _process(delta):
 	if Collision.hit:
 		flash.play("flash")
 		Collision.hit = false
+		Collision.hit2 = true
 	if Collision.shield:
 		$shield.visible = true
 	else:
@@ -65,25 +66,6 @@ func Kill():
 	get_tree().current_scene.add_child(_particle)
 	queue_free()
 func _physics_process(delta):
-	#input_vector.x = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
-	#rotation_dir = 0
-	#if Input.is_action_pressed("ui_right"):
-		#rotation_dir += 1
-	#if Input.is_action_pressed("ui_left"):
-		#rotation_dir += -1
-	#velocity += Vector2(input_vector.x * acceleration * delta, 0).rotated(rotation)
-	#velocity.x = clamp(velocity.x, -max_speed, max_speed)
-	#velocity.y = clamp(velocity.y, -max_speed, max_speed)
-	#if input_vector.x == 0:
-		#velocity = lerp(velocity, Vector2.ZERO, friction_weight)
-		#if abs(velocity.x) <= 0.1:
-			#velocity.x = 0
-		#if abs(velocity.y) <= 0.1:
-			#velocity.y = 0
-	#rotation += rotation_dir * rotation_speed * delta
-	#move_and_slide()
-	
-	#UPDATE FOR JOYSTICK
 	var gx = Collision.X# - 2000
 	var gy = Collision.Y# - 2000
 	#print(str(gx) + ":" + str(gy))

@@ -13,13 +13,13 @@ public partial class Connection : Node2D
 	public override void _Ready()
 	{
 		text = GetNode<RichTextLabel>("RichTextLabel");
-		//serialPort = new SerialPort();
-		//serialPort.PortName = "COM6";
-		//serialPort.BaudRate = 4800;
-		//serialPort.Open();
+		serialPort = new SerialPort();
+		serialPort.PortName = "COM7";
+		serialPort.BaudRate = 4800;
+		serialPort.Open();
 		
 		serialPort2 = new SerialPort();
-		serialPort2.PortName = "COM7";
+		serialPort2.PortName = "COM6";
 		serialPort2.BaudRate = 4800;
 		serialPort2.Open();
 	}
@@ -27,9 +27,8 @@ public partial class Connection : Node2D
 	public override void _Process(double delta)
 	{
 		//if(!serialPort.IsOpen) return;
-		//string serialMessage = serialPort.ReadExisting();
-		
-		//text.Text = serialMessage;
+		string serialMessage = serialPort.ReadExisting();
+		text.Text = serialMessage;
 		string b1 = @"\bB1\b";
 		string b2 = @"\bB2\b";
 		string b3 = @"\bB3\b";
@@ -51,69 +50,68 @@ public partial class Connection : Node2D
 		string X4 = @"\bX:4";
 		string X5 = @"\bX:5";
 		string X6 = @"\bX:6";
-		
-		//text.Call("print", serialMessage);
-		//if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, b1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "B1\n", "B");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, b2, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "B2\n", "B");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, b3, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "B3\n", "B");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y0, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "0", "Y");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "1", "Y");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y2, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "2", "Y");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y3, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "3", "Y");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y4, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "4", "Y");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y5, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "5", "Y");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y6, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "6", "Y");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X0, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "0", "X");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "1", "X");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X2, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "2", "X");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X3, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "3", "X");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X4, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "4", "X");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X5, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "5", "X");
-		//}
-		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X6, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
-			//text.Call("msg", "6", "X");
-		//}
-		
-		
-		
+		text.Call("msg", "2000", "X");
+		text.Call("msg", "2000", "Y");
+		if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, b1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "B1\n", "B");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, b2, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "B2\n", "B");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, b3, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "B3\n", "B");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y0, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "0", "Y");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "1", "Y");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y2, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "2", "Y");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y3, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "3", "Y");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y4, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "4", "Y");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y5, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "5", "Y");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y6, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "6", "Y");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X0, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "0", "X");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "1", "X");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X2, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "2", "X");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X3, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "3", "X");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X4, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "4", "X");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X5, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "5", "X");
+		}
+		else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X6, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
+			text.Call("msg", "6", "X");
+		}
 		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, X, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			//text.Call("msg", System.Text.RegularExpressions.Regex.Match(serialMessage, @"X:(\d+)").Groups[1].Value, "X");
 		//}
 		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			//text.Call("msg", System.Text.RegularExpressions.Regex.Match(serialMessage, @"Y:(\d+)").Groups[1].Value, "Y");
 		//}
-		//serialPort.Write(text.Call("getReturn").ToString());
+		if (text.Call("hit").ToString() == "HIT"){
+			serialPort2.Write(text.Call("getReturn").ToString());
+		}
 		
 		string serialMessage2 = serialPort2.ReadExisting();
 		text.Text = serialMessage2;
@@ -136,7 +134,8 @@ public partial class Connection : Node2D
 		string pX4 = @"\bX:4";
 		string pX5 = @"\bX:5";
 		string pX6 = @"\bX:6";
-		
+		text.Call("msg2", "2000", "X");
+		text.Call("msg2", "2000", "Y");
 		if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage2, pb1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			text.Call("msg2", "pB1\n", "B");
 		}
@@ -194,6 +193,8 @@ public partial class Connection : Node2D
 		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage2, pY, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			//text.Call("msg2", System.Text.RegularExpressions.Regex.Match(serialMessage, @"Y:(\d+)").Groups[1].Value, "Y");
 		//}
-		serialPort2.Write(text.Call("getReturn2").ToString());
+		if (text.Call("hit").ToString() == "HIT"){
+			serialPort2.Write(text.Call("getReturn2").ToString());
+		}
 	}
 }

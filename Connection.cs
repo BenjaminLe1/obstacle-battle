@@ -14,13 +14,13 @@ public partial class Connection : Node2D
 	{
 		text = GetNode<RichTextLabel>("RichTextLabel");
 		serialPort = new SerialPort();
-		serialPort.PortName = "COM7";
-		serialPort.BaudRate = 4800;
+		serialPort.PortName = "COM6";
+		serialPort.BaudRate = 38400;
 		serialPort.Open();
 		
 		serialPort2 = new SerialPort();
-		serialPort2.PortName = "COM6";
-		serialPort2.BaudRate = 4800;
+		serialPort2.PortName = "COM7";
+		serialPort2.BaudRate = 38400;
 		serialPort2.Open();
 	}
 
@@ -109,9 +109,7 @@ public partial class Connection : Node2D
 		//else if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, Y, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			//text.Call("msg", System.Text.RegularExpressions.Regex.Match(serialMessage, @"Y:(\d+)").Groups[1].Value, "Y");
 		//}
-		if (text.Call("hit").ToString() == "HIT"){
-			serialPort2.Write(text.Call("getReturn").ToString());
-		}
+		
 		
 		string serialMessage2 = serialPort2.ReadExisting();
 		text.Text = serialMessage2;
@@ -194,7 +192,8 @@ public partial class Connection : Node2D
 			//text.Call("msg2", System.Text.RegularExpressions.Regex.Match(serialMessage, @"Y:(\d+)").Groups[1].Value, "Y");
 		//}
 		if (text.Call("hit").ToString() == "HIT"){
-			serialPort2.Write(text.Call("getReturn2").ToString());
+			serialPort2.Write(text.Call("getReturn").ToString());
+			serialPort.Write(text.Call("getReturn2").ToString());
 		}
 	}
 }

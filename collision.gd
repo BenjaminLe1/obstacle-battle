@@ -2,14 +2,14 @@ extends Node
 
 var test = "test"
 
-var lives = 10
+var lives = 3
 var score = 0
 
 var shield = false
 var speed = false
 var shrink = false
 var hit = false
-var hit2 = false
+var hit2 = true
 var dead = false
 
 #PLAYER 1

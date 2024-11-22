@@ -41,19 +41,20 @@ func _process(delta):
 		$shield.visible = false
 	if Collision.lives <= 0:
 		Collision.dead = true
+		Collision.hit2 = true
+		$killTimer.start()
 		Kill()
-		get_tree().change_scene_to_packed(game_over)
 
 func shield():
-	$shieldTimer.start
+	$shieldTimer.start()
 	Collision.shield = true
 func speed_up():
-	$speed_upTimer.start
+	$speed_upTimer.start()
 	acceleration = 600
 	max_speed = 600
 	Collision.speed = true
 func shrink():
-	$shrinkTimer.start
+	$shrinkTimer.start()
 	scale.x = .5
 	scale.y = .5
 	Collision.shrink = true
@@ -103,3 +104,7 @@ func _on_shrink_timer_timeout() -> void:
 func _on_energy_timeout() -> void:
 	if Collision.energy < 100:
 		Collision.energy += 1
+
+
+func _on_kill_timer_timeout() -> void:
+	get_tree().change_scene_to_packed(game_over)

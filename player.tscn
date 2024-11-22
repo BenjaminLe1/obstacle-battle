@@ -84,7 +84,11 @@ wait_time = 10.0
 wait_time = 0.2
 autostart = true
 
+[node name="killTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [connection signal="timeout" from="shieldTimer" to="." method="_on_shield_timer_timeout"]
 [connection signal="timeout" from="speed_upTimer" to="." method="_on_speed_up_timer_timeout"]
 [connection signal="timeout" from="shrinkTimer" to="." method="_on_shrink_timer_timeout"]
 [connection signal="timeout" from="energy" to="." method="_on_energy_timeout"]
+[connection signal="timeout" from="killTimer" to="." method="_on_kill_timer_timeout"]

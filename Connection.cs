@@ -19,7 +19,7 @@ public partial class Connection : Node2D
 		serialPort.Open();
 		
 		serialPort2 = new SerialPort();
-		serialPort2.PortName = "COM6";
+		serialPort2.PortName = "COM7";
 		serialPort2.BaudRate = 38400;
 		serialPort2.Open();
 	}
@@ -47,7 +47,7 @@ public partial class Connection : Node2D
 		string X4 = @"\bX:4";
 		string X5 = @"\bX:5";
 		string X6 = @"\bX:6";
-		
+
 		if (System.Text.RegularExpressions.Regex.IsMatch(serialMessage, b1, System.Text.RegularExpressions.RegexOptions.IgnoreCase)){
 			text.Call("msg", "B1\n", "B");
 		}

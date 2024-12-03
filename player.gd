@@ -71,14 +71,32 @@ func _physics_process(delta):
 	var gy = Collision.Y# - 2000
 	#print(str(gx) + ":" + str(gy))
 	if gy >= 4:
-		input_vector.x = 1
+		if Collision.counter2 == 30:
+			Collision.Y = 0
+			Collision.counter2 = 0
+		else:
+			Collision.counter2 += 1
+			input_vector.x = 1
 	else:
 		input_vector.x = 0
+		Collision.counter2 = 0
 	rotation_dir = 0
-	if gx >= 4:
-		rotation_dir += -1
-	elif gx < 3 and gx > 0:
-		rotation_dir += 1
+	if gx == 6:
+		if Collision.counter == 15:
+			Collision.X = 0
+			Collision.counter = 0
+		else:
+			Collision.counter += 1
+			rotation_dir += -1
+	elif gx == 1:
+		if Collision.counter == 15:
+			Collision.X = 0
+			Collision.counter = 0
+		else:
+			Collision.counter += 1
+			rotation_dir += 1
+	else:
+		Collision.counter = 0
 	velocity += Vector2(input_vector.x * acceleration * delta, 0).rotated(rotation)
 	velocity.x = clamp(velocity.x, -max_speed, max_speed)
 	velocity.y = clamp(velocity.y, -max_speed, max_speed)

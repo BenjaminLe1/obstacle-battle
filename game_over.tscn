@@ -82,7 +82,11 @@ theme_override_fonts/font = ExtResource("4_0bwgj")
 theme_override_font_sizes/font_size = 40
 text = "EXIT GAME"
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1285.0
+offset_top = 198.0
+offset_right = 1576.0
+offset_bottom = 223.0
 theme_override_fonts/font = ExtResource("4_0bwgj")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 35

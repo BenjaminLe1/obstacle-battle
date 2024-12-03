@@ -27,15 +27,9 @@ func msg(message, type):
 			$B3.start()
 			b3 = false
 	elif type == "X": #0 - 4000
-		if int(message) < 1700 or int(message) > 2200:
-			Collision.X = int(message)
-		else:
-			Collision.X = 0
+		Collision.X = int(message)
 	elif type == "Y": #0 - 4000
-		if int(message) < 1700 or int(message) > 2200:
-			Collision.Y = int(message)
-		else:
-			Collision.Y = 0
+		Collision.Y = int(message)
 func msg2(message, type):
 	if type == "B":
 		if message == "pB1\n" and pb1:
@@ -54,15 +48,9 @@ func msg2(message, type):
 			$pB3.start()
 			pb3 = false
 	elif type == "X": #0 - 4000
-		if int(message) < 1700 or int(message) > 2200:
-			Collision.pX = int(message)
-		else:
-			Collision.pX = 0
+		Collision.pX = int(message)
 	elif type == "Y": #0 - 4000
-		if int(message) < 1700 or int(message) > 2200:
-			Collision.pY = int(message)
-		else:
-			Collision.pY = 0
+		Collision.pY = int(message)
 func hit():
 	if Collision.hit2:
 		Collision.hit2 = false

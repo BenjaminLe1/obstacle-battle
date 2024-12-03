@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://camt2om73uxxu"]
+[gd_scene load_steps=13 format=3 uid="uid://camt2om73uxxu"]
 
 [ext_resource type="Shader" path="res://world.gdshader" id="1_8i1n0"]
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
 [ext_resource type="PackedScene" uid="uid://6nyuithkc6gx" path="res://player.tscn" id="1_wrisp"]
-[ext_resource type="PackedScene" path="res://meteor1.tscn" id="2_r7unl"]
+[ext_resource type="PackedScene" uid="uid://dpf7v36h4r0oq" path="res://meteor1.tscn" id="2_r7unl"]
 [ext_resource type="PackedScene" uid="uid://lautpp3omp3q" path="res://hud.tscn" id="5_3khpd"]
+[ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="5_hn4fv"]
 [ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
 [ext_resource type="PackedScene" uid="uid://dcbc0i0ehh12u" path="res://connection.tscn" id="8_ici5c"]
 
@@ -12,10 +13,10 @@
 shader = ExtResource("1_8i1n0")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wb73"]
-size = Vector2(1416, 9.75)
+size = Vector2(1938, 9.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqj0y"]
-size = Vector2(6.5, 832)
+size = Vector2(11.25, 1080)
 
 [sub_resource type="GDScript" id="GDScript_qlby5"]
 script/source = "extends CharacterBody2D
@@ -40,7 +41,6 @@ func _process(delta):
 			print(\"Shooting Missle\")
 			Collision.special = 0
 		Collision.pB3 = false
-	$Node2D.look_at(get_global_mouse_position())
 
 func shoot():
 	var obstacle = ObstaclePath.instantiate()
@@ -79,24 +79,32 @@ var SPEED = 300
 func _physics_process(delta: float) -> void:
 	#LEFT IS 6 RIGHT IS 1
 	#UP IS 6 DOWN IS 1
-	var x = Collision.pX / 6.0
-	var y = Collision.pY / 6.0
+	var x = (Collision.pX - 1) / 5.0
+	var y = (Collision.pY - 1) / 5.0
 	if Collision.pX == 0:
 		x = .5
 	if Collision.pY == 0:
 		y = .5
-	if Collision.pX == 6: #LEFT
-		position.x = 1280
-		position.y = int(y * 720.0)
-	elif Collision.pX == 1: #RIGHT
-		position.x = 0
-		position.y = int(y * 720.0)
-	elif Collision.pY == 6: #UP
-		position.x = int(x * 1280.0)
-		position.y = 720
-	elif Collision.pY == 1: #DOWN
-		position.x = int(x * 1280.0)
-		position.y = 0
+	var x_abs = abs(x - 0.5)
+	var y_abs = abs(y - 0.5)
+	
+	#bottom left is -320, -176 bottom right is 1600, 896
+	if x_abs >= y_abs:
+		if Collision.pX >= 4: #LEFT
+			position.x = 1570
+			position.y = int(y * 1022.0 - 156.0)
+		else: #RIGHT
+			position.x = -300
+			position.y = int(y * 1022.0 - 156.0)
+	else:
+		if Collision.pY >= 4: #UP
+			position.x = int(x * 1920.0 - 300.0)
+			position.y = 876
+		else: #DOWN
+			position.x = int(x * 1920.0 - 300.0)
+			position.y = -156
+	#Collision.pX = 2.5
+	#Collision.pY = 2.5
 	move_and_slide()
 
 func _on_special_timeout() -> void:
@@ -115,10 +123,10 @@ position = Vector2(0, 2)
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_repeat = 2
 material = SubResource("ShaderMaterial_m3370")
-offset_left = -600.0
-offset_top = -378.0
-offset_right = 1928.0
-offset_bottom = 1118.0
+offset_left = -320.0
+offset_top = -178.0
+offset_right = 1600.0
+offset_bottom = 894.0
 texture = ExtResource("1_8m3x3")
 
 [node name="player" parent="." groups=["player"] instance=ExtResource("1_wrisp")]
@@ -127,20 +135,20 @@ position = Vector2(640, 360)
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Border"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(644, -62.875)
+position = Vector2(639, -178)
 shape = SubResource("RectangleShape2D_1wb73")
 one_way_collision_margin = 0.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(640, 766)
+position = Vector2(638, 894)
 shape = SubResource("RectangleShape2D_1wb73")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1342.5, 350)
+position = Vector2(1600, 358)
 shape = SubResource("RectangleShape2D_mqj0y")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-59.25, 350)
+position = Vector2(-322.375, 354)
 shape = SubResource("RectangleShape2D_mqj0y")
 
 [node name="Sprite2D" parent="." instance=ExtResource("2_r7unl")]
@@ -156,15 +164,17 @@ position = Vector2(686, 536)
 scale = Vector2(0.144286, 0.141428)
 
 [node name="player2" type="CharacterBody2D" parent="."]
-position = Vector2(114, 612)
+position = Vector2(-248, 838)
 script = SubResource("GDScript_qlby5")
 
 [node name="Node2D" type="Node2D" parent="player2"]
-position = Vector2(1, 0)
 scale = Vector2(1.08472, 0.921899)
 
 [node name="Marker2D" type="Marker2D" parent="player2/Node2D"]
 position = Vector2(1.19209e-06, -6.79493e-06)
+
+[node name="Sprite2D" type="Sprite2D" parent="player2/Node2D"]
+texture = ExtResource("5_hn4fv")
 
 [node name="special" type="Timer" parent="player2"]
 wait_time = 0.2

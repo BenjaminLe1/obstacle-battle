@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://lautpp3omp3q"]
+[gd_scene load_steps=3 format=3 uid="uid://lautpp3omp3q"]
 
 [ext_resource type="Script" path="res://hud.gd" id="1_m62qi"]
+[ext_resource type="FontFile" uid="uid://wo72mqatemvm" path="res://bytebounce/ByteBounce.ttf" id="2_ta1sn"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_m62qi")
@@ -8,3 +9,5 @@ script = ExtResource("1_m62qi")
 [node name="collisioncount" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("2_ta1sn")
+theme_override_font_sizes/font_size = 43

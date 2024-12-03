@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjfb2mtgf55w"]
+[gd_scene load_steps=6 format=3 uid="uid://bjfb2mtgf55w"]
 
 [ext_resource type="Script" path="res://game_over.gd" id="1_x1vl2"]
-[ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="2_1t4qk"]
+[ext_resource type="Shader" path="res://game_over.gdshader" id="2_m60fb"]
+[ext_resource type="Texture2D" uid="uid://0vk2dvqpj2g1" path="res://movingbackground.jpg" id="3_x4oac"]
+[ext_resource type="FontFile" uid="uid://wo72mqatemvm" path="res://bytebounce/ByteBounce.ttf" id="4_0bwgj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4vp7"]
+shader = ExtResource("2_m60fb")
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -13,13 +18,15 @@ grow_vertical = 2
 script = ExtResource("1_x1vl2")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_n4vp7")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_1t4qk")
+texture = ExtResource("3_x4oac")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -42,7 +49,8 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("4_0bwgj")
+theme_override_font_sizes/font_size = 80
 text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -61,6 +69,8 @@ layout_mode = 2
 
 [node name="StartButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_0bwgj")
+theme_override_font_sizes/font_size = 40
 text = "RETURN TO HOME"
 
 [node name="Control3" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
@@ -68,4 +78,11 @@ layout_mode = 2
 
 [node name="ExitButton" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("4_0bwgj")
+theme_override_font_sizes/font_size = 40
 text = "EXIT GAME"
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_0bwgj")
+theme_override_font_sizes/font_size = 40

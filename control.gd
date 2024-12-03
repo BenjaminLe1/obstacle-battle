@@ -19,7 +19,7 @@ func _on_timer_timeout() -> void:
 			seconds = 60
 	seconds +=1
 	if !Collision.dead:
-		$Label.text = "Score: " + str(seconds)
+		$Label2.text = "Score: " + str(seconds)
 		Collision.score = seconds
 
 func reset_timer():

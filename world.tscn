@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://camt2om73uxxu"]
+[gd_scene load_steps=14 format=3 uid="uid://camt2om73uxxu"]
 
 [ext_resource type="Shader" path="res://world.gdshader" id="1_8i1n0"]
 [ext_resource type="Texture2D" uid="uid://ruvyq6g4pk0c" path="res://backgroundSpace_01.1.png" id="1_8m3x3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dn1mxbxrqhgr5" path="res://icon.svg" id="5_hn4fv"]
 [ext_resource type="PackedScene" uid="uid://behj4mwu4mq6m" path="res://timer.tscn" id="6_ue8mf"]
 [ext_resource type="PackedScene" uid="uid://dcbc0i0ehh12u" path="res://connection.tscn" id="8_ici5c"]
+[ext_resource type="FontFile" uid="uid://wo72mqatemvm" path="res://bytebounce/ByteBounce.ttf" id="8_p6xig"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m3370"]
 shader = ExtResource("1_8i1n0")
@@ -24,6 +25,8 @@ script/source = "extends CharacterBody2D
 const ObstaclePath = preload(\"res://obstacle.tscn\")
 const BombPath = preload(\"res://bomb.tscn\")
 const MisslePath = preload(\"res://guidedmissle.tscn\")
+@export var game_over =  preload(\"res://game_over.tscn\") as PackedScene
+
 var obstacle_speed = 400  # Adjust this value to change the speed of the projectile
 
 func _process(delta):
@@ -187,7 +190,14 @@ position = Vector2(640, 360)
 [node name="HUD" parent="." instance=ExtResource("5_3khpd")]
 
 [node name="Control" parent="HUD" instance=ExtResource("6_ue8mf")]
-visible = false
+
+[node name="Label2" type="Label" parent="HUD/Control"]
+layout_mode = 0
+offset_left = 864.0
+offset_right = 920.0
+offset_bottom = 38.0
+theme_override_fonts/font = ExtResource("8_p6xig")
+theme_override_font_sizes/font_size = 55
 
 [node name="Connection" parent="." instance=ExtResource("8_ici5c")]
 position = Vector2(0, -2)

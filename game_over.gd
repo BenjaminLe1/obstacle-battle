@@ -10,6 +10,8 @@ extends Control
 
 func _ready():
 	print("Entered this ready function")
+	var score = Collision.score
+	$Label.text = "Your Final Score: " + str(score)
 	start_button.pressed.connect(on_start_pressed)
 	exit_button.pressed.connect(on_exit_pressed)
 	

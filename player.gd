@@ -65,6 +65,7 @@ func Kill():
 	_particle.rotation = global_rotation
 	_particle.emitting = true
 	get_tree().current_scene.add_child(_particle)
+	var over = game_over.instantiate()
 	queue_free()
 func _physics_process(delta):
 	var gx = Collision.X# - 2000

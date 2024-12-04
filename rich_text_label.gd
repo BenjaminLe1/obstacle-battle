@@ -7,6 +7,7 @@ var b3 = true
 var pb1 = true
 var pb2 = true
 var pb3 = true
+
 func print(msg):
 	print(msg)
 func msg(message, type):

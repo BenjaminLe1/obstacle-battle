@@ -13,6 +13,7 @@ var hit2 = true
 var dead = false
 var counter = 0
 var counter2 = 0
+var ind = true
 
 #PLAYER 1
 var B1 = false

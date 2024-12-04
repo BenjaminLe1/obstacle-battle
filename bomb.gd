@@ -3,7 +3,7 @@ extends CharacterBody2D
 var count = 0
 const bombParticle = preload("res://bombParticle.tscn")
 func _physics_process(delta):
-	var collision_info = move_and_collide(velocity * delta * 1.4)
+	var collision_info = move_and_collide(velocity * delta * 1.8)
 	if collision_info:
 		var collided_with = collision_info.get_collider()
 		if collided_with.is_in_group("player"):
